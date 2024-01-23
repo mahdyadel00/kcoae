@@ -1,0 +1,10 @@
+.image_size{
+    color: red;
+    font-size: smaller;
+}
+#sidebar{
+    text-align: right;
+}
+.note-editing-area{
+    min-height:200px;
+}

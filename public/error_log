@@ -1,0 +1,10 @@
+[21-May-2023 07:45:10 UTC] PHP Warning:  require(/home/kcoae/stage.kco.ae/center/vendor/autoload.php): Failed to open stream: No such file or directory in /home/kcoae/stage.kco.ae/index.php on line 34
+[21-May-2023 07:45:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/kcoae/stage.kco.ae/center/vendor/autoload.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/kcoae/stage.kco.ae/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/kcoae/stage.kco.ae/index.php on line 34
+[21-May-2023 08:12:30 UTC] PHP Warning:  require(/home/kcoae/stage.kco.ae/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/kcoae/stage.kco.ae/index.php on line 34
+[21-May-2023 08:12:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/kcoae/stage.kco.ae/../vendor/autoload.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/kcoae/stage.kco.ae/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/kcoae/stage.kco.ae/index.php on line 34
