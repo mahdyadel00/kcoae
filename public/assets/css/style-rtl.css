@@ -475,7 +475,6 @@ ul.dropdown-menu>li>a {
   text-align: center;
   /* Animation */
   z-index: 0;
-  height: 100px;
 }
 
 .client-count-item-1 {

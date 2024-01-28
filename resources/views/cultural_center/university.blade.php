@@ -3,13 +3,13 @@
 @section('cultural')
         <!-- END HEADER -->
         <div class="container pt-5 pb-5">
-            <div class="main-href">
+            <div class="main-href mt-4">
                 <a href="#"></a>
             </div>
             <!-- card -->
-            <div class="card card-default mb-5">
-                <div class="card-body">
-                    <select id="country"  class="form-control main-select" name="country_id" >
+            <div class="card card-default mb-5" style="padding:20px 5px;">
+                <div class="card-body ">
+                    <select id="country"  class="form-control main-select" name="country_id" style="padding:0 5px;height:40px;">
                         <option  selected value="">حدد الدولة</option>
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -17,25 +17,25 @@
                     </select>
                     <div class="card-2">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mt-2 mb-2">
                                     <h7 class="mb-2">الجامعة :</h7>
-                                    <select id="university" class="form-control" name="university_id" >
+                                    <select id="university" class="form-control" name="university_id" style="padding:0 5px;height:40px;">
 
                                     </select>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mt-2 mb-2">
                                     <h7 class="mb-2">التخصص:</h7>
 
-                                    <select id="category" class="form-control" name="specialty_id" >
+                                    <select id="category" class="form-control" name="specialty_id" style="padding:0 5px;height:40px;">
                                         <option selected value="">حدد التخصص</option>
                                         @foreach ($specialties as $specialty)
                                             <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
                                         @endforeach
                                     </select>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mt-2 mb-2">
                                     <h7 class="mb-2">التخصص الفرعي :</h7>
-                                    <select id="subcategory" class="form-control" name="sub_specialty_id" >
+                                    <select id="subcategory" class="form-control" name="sub_specialty_id" style="padding:0 5px;height:40px;">
                                         <option selected value="">حدد التخصص</option>
                                         @foreach ($sub_specialties as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
