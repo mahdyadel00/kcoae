@@ -2427,6 +2427,9 @@ body {
   border: 1px solid #dee2e6;
 }
 
+.footer-inner {
+  padding: 3rem;
+}
 
 .footer-inner ul {
   list-style: none;
@@ -2549,3 +2552,17 @@ body {
   height: 41px;
   overflow: hidden;
 }
+
+@media screen and (max-width:790px) {
+  .footer-inner {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .footer-inner {
+    padding: 2rem 1rem;
+  }
+}
+
+@media screen {}

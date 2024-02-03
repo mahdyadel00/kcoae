@@ -1,6 +1,6 @@
         <!-- FOOTER SECTION -->
         <footer class="footer-section black-bg">
-            <div class="footer-inner p-5">
+            <div class="footer-inner" >
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
