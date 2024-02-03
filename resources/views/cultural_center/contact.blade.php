@@ -9,7 +9,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xl-5 col-lg-5 col-md-12 align-items-center c-center mb-3">
-                                <div class="hadding-text-area">
+                                <div class="hadding-text-area" style="padding-right:20px;">
                                     <h2 class="black-c popin small">اتصل بنا</h2>
                                     <p>{!! $contact_us->description !!}</p>
                                 </div>
