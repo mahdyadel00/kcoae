@@ -74,12 +74,12 @@
                                                     <input id="name" placeholder="تأكيد كلمه المرور" class="form-control form-mane" required="" type="password" name="password_confirmation" style="padding: 10px !important;">
                                                 </div>
                                             </div>
-                                            <div class="buttons pt-4">
+                                            <div class="buttons pt-4 col-md-12" style="display: flex;justify-content: center;align-items: center;">
                                                 <button type="submit" class="btn btn-button btn-button-1 blue-bg">انشاء حساب </button>
                                             </div>
                                             </div>
-                                            <div class="pt-4" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
-                                                <a href="#"  class="btn" style="color:">  دخول للحساب </a>
+                                            <div class="pt-5" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
+                                                <a href="#"  class="btn">  دخول للحساب </a>
                                                 <a href="#"  class="btn">  ارسال رمز التحقق الى البريد الالكتروني </a>
                                             </div>
                                         </form>

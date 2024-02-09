@@ -49,11 +49,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="buttons pt-4">
+                                            <div class="buttons pt-4 col-md-12" style="display: flex;justify-content: center;align-items: center;">
                                                 <button type="submit" class="btn btn-button btn-button-1 blue-bg"> دخول </button>
                                             </div>
-                                            <div class="pt-4" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
-                                                <a href="#"  class="btn" style="color:">   انشاء حساب </a>
+                                            <div class="pt-5" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
+                                                <a href="#"  class="btn">   انشاء حساب </a>
                                                 <a href="#"  class="btn">  ارسال رمز التحقق الى البريد الالكتروني </a>
                                             </div>
                                         </form>
