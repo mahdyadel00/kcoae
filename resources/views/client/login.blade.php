@@ -63,24 +63,6 @@
                             <!-- END COMMENT RESPOND -->
                         </div>
                     </div>
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                        <div class="contact-widget mb-5">
-                            <h5 class="contact-widget-title no-margin"><span> الدخول للحساب</span></h5>
-                            <div class="textwidget">
-                                <div class="respons-box">
-                                  <p class="paragraph"> يمكنك إنشاء حساب عن طريق الرقم المدني</p>
-                                  <a href="#" type="submit" class="btn btn-button btn-button-1 blue-bg">انشاء الحساب</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-widget">
-                            <h5 class="contact-widget-title no-margin"><span>نسيت كلمة السر </span></h5>
-                            <div class="textwidget">
-                            <p class="paragraph"> يمكنك استرجاع كلمة السر</p>
-                                  <a href="#" class="btn btn-button btn-button-1 blue-bg">ارسال رمز التحقق الى البريد الالكتروني</a>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

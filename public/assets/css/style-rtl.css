@@ -54,9 +54,9 @@ ol {
 }
 
 a,
-a:hover,
+/* a:hover, */
 .btn,
-.btn:hover,
+/* .btn:hover, */
 button,
 button:hover,
 .smoth,
@@ -69,13 +69,15 @@ button:hover,
 }
 
 a,
-a:focus,
+/* a:focus, */
 a:hover:focus,
 button:focus,
 button:hover:focus,
-.btn:focus,
-.btn:hover:focus,
-a:hover {
+.btn:focus
+
+/* .btn:hover:focus, */
+/* a:hover */
+  {
   text-decoration: none;
   outline: none;
   border: none;
