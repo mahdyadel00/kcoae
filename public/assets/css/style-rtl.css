@@ -2169,7 +2169,7 @@ td {
 code,
 samp,
 var {
-  text-align: left;
+  text-align: right;
   direction: rtl;
 }
 
@@ -2566,3 +2566,10 @@ body {
 }
 
 @media screen {}
+
+/* login , register , forget */
+.textwidget .paragraph {
+  font-weight: bold;
+  padding: 10px 0;
+  font-size: 15px;
+}
