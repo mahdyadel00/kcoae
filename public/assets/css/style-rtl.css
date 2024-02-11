@@ -2575,3 +2575,157 @@ body {
   padding: 10px 0;
   font-size: 15px;
 }
+
+/* page myprofile */
+main {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  max-width: 1000px;
+  width: 100%;
+  margin: 90px auto;
+}
+
+main .text {
+  margin: 0 20px;
+}
+
+main .text h1 {
+  margin: 20px 0;
+  color: #d1b686;
+}
+
+main .text p {
+  margin: 5px 15px;
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.boxing {
+  max-width: 1000px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.boxing .title {
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.content form .user-details {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  /* margin: 20px 0 12px 0; */
+  align-items: baseline;
+}
+
+form .user-details .input-box {
+  margin: 10px;
+  width: 210px;
+}
+
+
+
+form .input-box label {
+  font-size: 18px;
+  color: #143665;
+}
+
+.user-details .input-box input,
+.user-details .input-box .date,
+.user-details .input-box .select {
+  height: 35px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.input-box .btn {
+  padding: 7px 15px;
+  width: 180px;
+  margin: 15px auto;
+  border-radius: 7px;
+  border: none;
+  background-color: #143665;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .5s all;
+}
+
+.input-box .btn:hover {
+  background-color: #d1b686;
+  color: #fff;
+}
+
+.required:after {
+  content: "*";
+  color: red;
+}
+
+@media(max-width: 584px) {
+  .container {
+    max-width: 100%;
+  }
+
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  form .category {
+    width: 100%;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  main {
+    margin: 30px auto;
+  }
+
+}
+
+@media(max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+
+  main .text {
+    margin: 0 15px;
+  }
+
+  main .text p {
+    margin: 0 10px;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  main {
+    margin: 20px auto;
+  }
+}
