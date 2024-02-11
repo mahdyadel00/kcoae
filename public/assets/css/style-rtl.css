@@ -2576,7 +2576,7 @@ body {
   font-size: 15px;
 }
 
-/* page myprofile */
+/***** page myprofile ******/
 main {
   display: flex;
   justify-content: flex-start;
