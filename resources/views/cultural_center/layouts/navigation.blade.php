@@ -38,7 +38,7 @@
                                     </li>
                                 </ul>
                         @else
-                            <a href="{{ route('login_form') }}" class="btn btn-button btn-button-1 popin black-bg" >
+                        <a href="/register" class="btn btn-button btn-button-1 popin black-bg" style="color:#fff !important" >
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 دخول المستفيدين
                             </a>

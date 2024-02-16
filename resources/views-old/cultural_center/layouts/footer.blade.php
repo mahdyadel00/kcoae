@@ -1,5 +1,5 @@
         <!-- FOOTER SECTION -->
-        <footer class="footer-section black-bg">
+        <footer class="footer-section black-bg" style="background-color: #143665;">
             <div class="footer-inner p-5">
                 <div class="container">
                     <div class="row">

@@ -223,7 +223,8 @@ a.black-bg:hover {
 }
 
 .header-menu {
-  background-color: #1c4978;
+  /* background-color: #1c4978; */
+  background-color: #d1b686;
 }
 
 .search-h-icon button:focus,
@@ -276,7 +277,7 @@ input.form-control.header-s-input::placeholder {
 .btco-hover-menu a {
   text-transform: capitalize;
   padding: 10px;
-  color: #fff;
+  color: #5b5a5a;
   font-size: 14px;
   font-weight: 800;
 }
@@ -284,7 +285,7 @@ input.form-control.header-s-input::placeholder {
 .btco-hover-menu a:hover {
   text-transform: capitalize;
   padding: 10px;
-  color: #c79830;
+  color: #333 !important;
   font-size: 14px;
   font-weight: 800;
 }
@@ -730,12 +731,13 @@ ul.dropdown-menu>li>a {
 }
 
 .contact-form .btn.btn-button {
-  background: #00adef;
+  background: #143665;
+  color: #fff;
+
 }
 
 .contact-form .btn.btn-button:hover {
-  background: #181d31;
-  color: #fff;
+  background: #d1b686;
 }
 
 .subscrib-dec h2 {
@@ -1645,7 +1647,7 @@ h5.contact-widget-title.no-margin {
 /* university */
 .main-href {
   text-align: center;
-  background-color: #00adef;
+  background-color: #143665;
   border: none;
   color: white;
   padding: 25px 32px;
@@ -1802,7 +1804,8 @@ td {
 }
 
 .dt-button {
-  background-color: #00adef;
+  background-color: #143665;
+  color: #fff;
 }
 
 /* counter */

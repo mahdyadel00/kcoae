@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="pt-5" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
                                                 <a href="{{ route('login_form') }}"  class="btn">  دخول للحساب </a>
-                                                <a href="{{ route('forget_password') }}"  class="btn"> هل نسيت كلمة المور </a>
+                                                <a href="{{ route('forget_password') }}"  class="btn"> هل نسيت كلمة المرور </a>
                                             </div>
                                         </form>
                                     </div>
