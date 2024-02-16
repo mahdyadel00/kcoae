@@ -58,11 +58,11 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
     Route::group(['middleware' => 'auth'], function () {
         ## About us Routes
         Route::resource('about', AboutController::class);
-        
+
         ## Admins Routes
         Route::resource('admins', AdminController::class);
         Route::get('/admin_del/{id}', [AdminController::class, 'destroy']);
-        
+
         ## Admins Routes
         Route::get('/users', [AdminController::class, 'users']);
         Route::get('/create_user', [AdminController::class, 'create_user']);
@@ -199,19 +199,22 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
 });
 
 ## Client Routs
-Route::get('/register', [ClientController::class, 'register_form']);
+Route::get('/register', [ClientController::class, 'register_form'])->name('register_form');
 Route::post('/register', [ClientController::class, 'register'])->name('register');
+Route::get('/login', [ClientController::class, 'loginView'])->name('login_form');
+Route::post('/client_login', [ClientController::class, 'login'])->name('client_login');
 Route::get('/register_code', [ClientController::class, 'register_code'])->name('register_code');
 Route::post('/verify_code', [ClientController::class, 'verify_code'])->name('verify_code');
-Route::post('/client_login', [ClientController::class, 'login'])->name('client_login');
 Route::post('/con_code', [ClientController::class, 'con_code'])->name('con_code');
 Route::post('/reset_code', [ClientController::class, 'reset_code'])->name('reset_code');
+Route::get('/forget_password', [ClientController::class, 'forgetPassword'])->name('forget_password');
 Route::post('/reset_password', [ClientController::class, 'reset_password'])->name('reset_password');
 
 Route::group(['middleware' => 'auth:client'], function () {
 
     Route::get('/profile', [ClientController::class,'showProfile']);
-    Route::post('/edit_profile', [ClientController::class,'edit_profile']);
+//    Route::post('/edit_profile', [ClientController::class,'edit_profile']);
+    Route::put('/edit_profile', [ClientController::class,'updateProfile'])->name('edit_profile');
     Route::post('/edit_password', [ClientController::class,'edit_password']);
     ## Orders Routes
     Route::resource('orders', \App\Http\Controllers\Cultural_center\OrderController::class);

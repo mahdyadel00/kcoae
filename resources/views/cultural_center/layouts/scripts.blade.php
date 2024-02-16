@@ -10,5 +10,6 @@
         navigation : true
     });
 </script>
+    @stack('js')
 <script src="{{asset('assets/js/main.js')}}"></script>
 <script src="{{asset('assets/js/slider.js')}}"></script>
