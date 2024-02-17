@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cultural_center;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\Auth\RegisterRequestClient;
 use App\Http\Requests\Frontend\Profile\UpdateRequestProfile;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -22,108 +23,136 @@ class ClientController extends Controller
         return view('client.register');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequestClient $request)
     {
-        $update=0;
-        $clien      =Client::where('email',$request->email)->first();
-        if($clien != null){
+//        $update=0;
+//        $clien      =Client::where('email',$request->email)->first();
+//        if($clien != null){
+//
+//            $id = Client::where('id','!=',$clien->id)
+//                ->where('ID_number',$request->ID_number)->first();
+//
+//            if($id != null){
+//                return redirect()->back()->withErrors(['msg'=>"الرقم الوطني تم أخذه مسبقا"]);
+//            }
+//            $mobile = Client::where('id','!=',$clien->id)
+//                ->where('mobile',$request->mobile)->first();
+//
+//            if( $mobile != null){
+//                return redirect()->back()->withErrors(['msg'=>"رقم الهاتف  تم أخذه مسبقا"]);
+//            }
+//
+//            $rules = [
+//                'password'                       => ['required', 'confirmed', Password::min(8)->numbers()->symbols()],
+//                'name'                           => 'required|string',
+//            ];
+//            $update=1;
+//        }else{
+//            $rules = [
+//                'password'                       => ['required', 'confirmed', Password::min(8)->numbers()->symbols()],
+//                'email'                          => 'required|email|unique:clients,email',
+//                'mobile'                         => 'required|unique:clients,mobile',
+//                'ID_number'                      => 'required|unique:clients,ID_number|integer',
+//                'name'                           => 'required|string',
+//            ];
+//        }
+//
+//        $customMessages = [
+//            'password.required' => 'حقل كلمة المورو لا يجب أن يكون فارغا',
+//            'password.confirmed' => ' تأكيد كلمة المرور غير مطابق',
+//            'password.min'   => 'يجب ان تكون كلمة المرور على الأقل مكونة من ثماني محارف',
+//            'email.unique'   => 'البريد الالكتروني تم اخذه مسبقا  ',
+//            'email.required' => 'حقل البريد الالكتروني لا يجب أن يكون فارغا',
+//            'mobile.unique'   => 'رقم الهاتف تم اخذه مسبقا  ',
+//            'mobile.required' => 'حقل رقم الهاتف لا يجب أن يكون فارغا',
+//            'name.required' => 'حقل الاسم لا يجب أن يكون فارغا',
+//            'ID_number.integer' => 'الرقم الوطني يجب ان يتكون من أرقام فقط',
+//        ];
+//
+//        if(Str::length($request->ID_number)!=12){
+//            return  redirect()->back()->withErrors(['msg' => 'الرقم الوطني يجب أن يتكون من 12 خانة ']);
+//
+//        }
+//        if ( ! preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $request->password)) {
+//            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي محرف كبير و محرف صغير  ']);
+//
+//        }
+//
+//        if ( ! preg_match('/\pL/u', $request->password)) {
+//            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي حرف واحد على الاأقل ']);
+//        }
+//
+//        if ( ! preg_match('/\p{Z}|\p{S}|\p{P}/u', $request->password)) {
+//            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي رمز واحد على الاأقل ']);
+//        }
+//
+//        if (  ! preg_match('/\pN/u', $request->password)) {
+//            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي رقم واحد على الأقل ']);
+//        }
+//
+//        $this->validate($request, $rules, $customMessages);
+//
+//        //send email
+//        $code=random_int(1000, 9999);
+//
+//        $details = [
+//            'title' => 'المكتب الثقافي الكويتي',
+//            'body' => 'رمز التأكيد الخاص بك '.$code
+//        ];
 
-            $id = Client::where('id','!=',$clien->id)
-                ->where('ID_number',$request->ID_number)->first();
+//        Mail::to($request->email)->send(new \App\Mail\MyMail($details));
 
-            if($id != null){
-                return redirect()->back()->withErrors(['msg'=>"الرقم الوطني تم أخذه مسبقا"]);
-            }
-            $mobile = Client::where('id','!=',$clien->id)
-                ->where('mobile',$request->mobile)->first();
+//        //send data
+//        if($update=='1'){
+//            $clien->update([
+//                'name'      =>$request->name,
+//                'mobile'    =>$request->mobile,
+//                'ID_number' =>$request->ID_number,
+//                'password'  =>Hash::make($request->password),
+//                'code'      =>$code
+//            ]);
+//        }else{
+//            $client= Client::create([
+//                'name'      =>$request->name,
+//                'email'     =>$request->email,
+//                'mobile'    =>$request->mobile,
+//                'ID_number' =>$request->ID_number,
+//                'password'  =>Hash::make($request->password),
+//                'code'      =>$code
+//            ]);
+//        }
+//
+//
+//        return view('client.code');
+//        dd($request->all());
+        try{
+            DB::beginTransaction();
 
-            if( $mobile != null){
-                return redirect()->back()->withErrors(['msg'=>"رقم الهاتف  تم أخذه مسبقا"]);
-            }
-
-            $rules = [
-                'password'                       => ['required', 'confirmed', Password::min(8)->numbers()->symbols()],
-                'name'                           => 'required|string',
-            ];
-            $update=1;
-        }else{
-            $rules = [
-                'password'                       => ['required', 'confirmed', Password::min(8)->numbers()->symbols()],
-                'email'                          => 'required|email|unique:clients,email',
-                'mobile'                         => 'required|unique:clients,mobile',
-                'ID_number'                      => 'required|unique:clients,ID_number|integer',
-                'name'                           => 'required|string',
-            ];
-        }
-
-        $customMessages = [
-            'password.required' => 'حقل كلمة المورو لا يجب أن يكون فارغا',
-            'password.confirmed' => ' تأكيد كلمة المرور غير مطابق',
-            'password.min'   => 'يجب ان تكون كلمة المرور على الأقل مكونة من ثماني محارف',
-            'email.unique'   => 'البريد الالكتروني تم اخذه مسبقا  ',
-            'email.required' => 'حقل البريد الالكتروني لا يجب أن يكون فارغا',
-            'mobile.unique'   => 'رقم الهاتف تم اخذه مسبقا  ',
-            'mobile.required' => 'حقل رقم الهاتف لا يجب أن يكون فارغا',
-            'name.required' => 'حقل الاسم لا يجب أن يكون فارغا',
-            'ID_number.integer' => 'الرقم الوطني يجب ان يتكون من أرقام فقط',
-        ];
-
-        if(Str::length($request->ID_number)!=12){
-            return  redirect()->back()->withErrors(['msg' => 'الرقم الوطني يجب أن يتكون من 12 خانة ']);
-
-        }
-        if ( ! preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $request->password)) {
-            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي محرف كبير و محرف صغير  ']);
-
-        }
-
-        if ( ! preg_match('/\pL/u', $request->password)) {
-            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي حرف واحد على الاأقل ']);
-        }
-
-        if ( ! preg_match('/\p{Z}|\p{S}|\p{P}/u', $request->password)) {
-            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي رمز واحد على الاأقل ']);
-        }
-
-        if (  ! preg_match('/\pN/u', $request->password)) {
-            return  redirect()->back()->withErrors(['msg' => 'كلمة المرور يجب ان تحوي رقم واحد على الأقل ']);
-        }
-
-        $this->validate($request, $rules, $customMessages);
-
-        //send email
-        $code=random_int(1000, 9999);
-//        $data=['code'=>$code];
-
-        $details = [
-            'title' => 'المكتب الثقافي الكويتي',
-            'body' => 'رمز التأكيد الخاص بك '.$code
-        ];
-
-        Mail::to($request->email)->send(new \App\Mail\MyMail($details));
-
-        //send data
-        if($update=='1'){
-            $clien->update([
-                'name'      =>$request->name,
-                'mobile'    =>$request->mobile,
-                'ID_number' =>$request->ID_number,
-                'password'  =>Hash::make($request->password),
-                'code'      =>$code
-            ]);
-        }else{
-            $client= Client::create([
+            $client = Client::create([
                 'name'      =>$request->name,
                 'email'     =>$request->email,
                 'mobile'    =>$request->mobile,
                 'ID_number' =>$request->ID_number,
                 'password'  =>Hash::make($request->password),
-                'code'      =>$code
             ]);
+
+            DB::commit();
+            //mail
+            $code=random_int(1000, 9999);
+            $details = [
+                'title' => 'المكتب الثقافي الكويتي',
+                'body' => 'رمز التأكيد الخاص بك '.$code
+            ];
+            Mail::to($request->email)->send(new \App\Mail\MyMail($details));
+            $client->update(['code'=>$code]);
+            session()->flash('success', 'تم التسجيل بنجاح');
+            return view('client.code');
+        }catch (\Exception $e){
+            DB::rollBack();
+            dd($e->getMessage());
+            Log::channel('custom')->error($e->getMessage());
+            return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
         }
-
-
-        return view('client.code');
     }
 
     protected function loginView()
@@ -132,14 +161,6 @@ class ClientController extends Controller
     }
 
     public function verify_code(Request $request){
-//        $client=Client::find($request->client_id);
-//        if($client->code==$request->code){
-//            $client->update(['is_verify'=>1]);
-//            auth('client')->login($client);
-//            return redirect('/');
-//        }else{
-//            return redirect()->back()->with(['errors'=>' الرجاء التأكد من صحة الكود المدخل ']);
-//        }
         try{
             DB::beginTransaction();
             $client = Client::where('code', $request->code)->first();
