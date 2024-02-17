@@ -1,15 +1,4 @@
 <header class="header-section">
-  <!-- small header -->
-  <!-- <div class="small-header"> 
-    <nav class="samll-nav">
-                <div>
-                        <a href="/register" style="color:#fff !important ; font-weight:bold;padding:0 7px;" >
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                دخول المستفيدين
-                            </a>
-                </div>
-    </nav>
-  </div> -->
     <div class="header-menu">
         <div class="container">
             <nav class="navbar navbar-expand-xl btco-hover-menu">
