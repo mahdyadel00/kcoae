@@ -29,7 +29,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="name">اسم المستخدم</label>
-                                                        <input id="name" class="form-control form-mane" required="" type="text" name="name"  placeholder="example123" style="padding: 10px !important;">
+                                                        <input id="name" class="form-control form-mane" required="" type="text" name="name"  placeholder="اسم المستخدم" style="padding: 10px !important;">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
