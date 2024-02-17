@@ -228,8 +228,8 @@ a.black-bg:hover {
 }
 
 .header-menu {
-  /* background-color: #1c4978; */
-  background-color: #d1b686;
+  background-color: #1c4978;
+  /* background-color: #d1b686; */
 }
 
 .search-h-icon button:focus,
@@ -282,7 +282,7 @@ input.form-control.header-s-input::placeholder {
 .btco-hover-menu a {
   text-transform: capitalize;
   padding: 10px;
-  color: #5b5a5a;
+  color: #fff;
   font-size: 14px;
   font-weight: 800;
 }
@@ -290,7 +290,7 @@ input.form-control.header-s-input::placeholder {
 .btco-hover-menu a:hover {
   text-transform: capitalize;
   padding: 10px;
-  color: #333 !important;
+  color: #ffac4a !important;
   font-size: 14px;
   font-weight: 800;
 }
@@ -2739,7 +2739,7 @@ form .input-box label {
 }
 
 /* samll header in top */
-.small-header {
+/* .small-header {
   background-color: #143665 !important;
 }
 
@@ -2755,4 +2755,4 @@ form .input-box label {
   .small-header .samll-nav {
     width: 90%;
   }
-}
+} */
