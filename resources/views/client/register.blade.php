@@ -29,7 +29,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="name">اسم المستخدم</label>
-                                                        <input id="name" class="form-control form-mane" required="" type="text" name="name"  placeholder="ادخل اسم المستخدم" style="padding: 10px !important;">
+                                                        <input id="name" class="form-control form-mane" required="" type="text" name="name"  placeholder="example123" style="padding: 10px !important;">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -41,7 +41,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="email">البريد الألكتروني</label>
-                                                        <input id="email" class="form-control form-email" required="" type="email" name="email" placeholder="ادخل البريد الألكتروني" style="padding: 10px !important;">
+                                                        <input id="email" class="form-control form-email" required="" type="email" name="email" placeholder="example@gmail.com  " style="padding: 10px !important;">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -53,14 +53,14 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="password">كلمة السر</label>
+                                                    <label for="password">   كلمه السر <span style="color:red;">(يجب ان تتكون من ثمانية محارف على الأقل و تحتوي علي الاقل حرف A-z,a-z,1:9,*,#,$,5)</span> </label>
                                                     <input id="name" placeholder="ادخل كلمه المرور" class="form-control form-mane" title="كلمة المرور يجب ان تتكون من ثمانية محارف على الأقل و تحوي محرف صغير و محرف كبير و رمز " class="form-control form-mane" required="" type="password" name="password" style="padding: 10px !important;">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="password_confirmation">تأكيد كلمة السر</label>
+                                                <label for="password">  تأكيد  كلمه السر <span style="color:red;">(يجب ان تتكون من ثمانية محارف على الأقل و تحتوي علي الاقل حرف A-z,a-z,1:9,*,#,$,5)</span> </label>
                                                     <input id="name" placeholder="تأكيد كلمه المرور" class="form-control form-mane" required="" type="password" name="password_confirmation" style="padding: 10px !important;">
                                                 </div>
                                             </div>
