@@ -90,9 +90,14 @@ button:hover:focus,
 /*** all color **/
 
 .blue-bg {
-  background-color: #00adef;
+  background-color: #143665;
   color: #fff;
 }
+
+.blue-bg:hover {
+  background-color: #d1b686;
+}
+
 
 .blue-c {
   color: #00adef;
@@ -2732,3 +2737,17 @@ form .input-box label {
     margin: 20px auto;
   }
 }
+
+/* samll header in top */
+.small-header {
+  background-color: #143665 !important;
+}
+
+.small-header .samll-nav {
+  width: 60%;
+  margin: auto;
+  padding: 10px 0 !important;
+  display: flex;
+  justify-content: flex-start;
+}
+
