@@ -123,7 +123,7 @@ class ClientController extends Controller
         }
 
 
-        return view('client.code',['client_id'=>$client->id]);
+        return view('client.code');
     }
 
     protected function loginView()
