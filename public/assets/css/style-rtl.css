@@ -2751,3 +2751,8 @@ form .input-box label {
   justify-content: flex-start;
 }
 
+@media(max-width: 450px) {
+  .small-header .samll-nav {
+    width: 90%;
+  }
+}
