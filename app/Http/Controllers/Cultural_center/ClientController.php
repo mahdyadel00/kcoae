@@ -132,13 +132,31 @@ class ClientController extends Controller
     }
 
     public function verify_code(Request $request){
-        $client=Client::find($request->client_id);
-        if($client->code==$request->code){
-            $client->update(['is_verify'=>1]);
-            auth('client')->login($client);
+//        $client=Client::find($request->client_id);
+//        if($client->code==$request->code){
+//            $client->update(['is_verify'=>1]);
+//            auth('client')->login($client);
+//            return redirect('/');
+//        }else{
+//            return redirect()->back()->with(['errors'=>' الرجاء التأكد من صحة الكود المدخل ']);
+//        }
+        try{
+            DB::beginTransaction();
+            $client = Client::where('code', $request->code)->first();
+
+            if(!$client){
+                return redirect()->back()->withErrors(['msg'=>'هذا الحساب غير موجود']);
+            }
+
+            DB::commit();
+            session()->flash('success', 'تم التحقق بنجاح');
             return redirect('/');
-        }else{
-            return redirect()->back()->with(['errors'=>' الرجاء التأكد من صحة الكود المدخل ']);
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            Log::channel('custom')->error($e->getMessage());
+            return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
+
         }
 
     }

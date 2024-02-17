@@ -45,7 +45,7 @@
                                             </div>
                                         </div>
 
-                                        <input type="hidden"  name="client_id" value="{{$client_id}}">
+{{--                                        <input type="hidden"  name="client_id" value="{{$client_id}}">--}}
 
                                     </div>
                                     <div class="buttons pt-4">
