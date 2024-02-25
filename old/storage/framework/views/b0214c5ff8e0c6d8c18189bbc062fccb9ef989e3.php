@@ -1,0 +1,98 @@
+<?php $__env->startSection('content'); ?>
+    <div id="content" class="main-content">
+        <!--  BEGIN BREADCRUMBS  -->
+        <?php echo $__env->make('admin.layouts.secondary_nav',['title'=>'التواصل الاجتماعي ','sub_title'=>''], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <br>
+        <!--  END BREADCRUMBS  -->
+
+        <!-- Content -->
+        <div class="col-12">
+            <div class="user-profile ">
+                <div class="widget-content widget-content-area">
+                    <?php if(session()->has('message')): ?>
+
+                        <div class="alert alert-success">
+
+                            <?php echo e(session()->get('message')); ?>
+
+
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="table-responsive" id="t1">
+                                <a class="btn btn-primary mb-2 me-4" href="<?php echo e(route('admin_panel.social.create')); ?>">إضافة </a>
+
+                                <table id="myTable1" class="table table-striped table-bordered table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col"></th>
+                                        <th scope="col">الأيقونة </th>
+                                        <th scope="col">الرابط</th>
+
+
+                                        <th class="text-center" scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <?php $counter=1;?>
+                                    <?php $__currentLoopData = $socials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                        <tr>
+                                            <td>
+                                                <p class="text-center"><?php echo e($counter); ?></p>
+                                                <span class="text-success"></span>
+                                                <?php $counter++;?>
+                                            </td>
+                                            <td>
+                                                <div class="media">
+                                                    <div class="avatar me-2">
+                                                        <i class=" <?php echo e($social->icon); ?>"></i>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo e($social->link); ?>"><?php echo e($social->link); ?></a>
+
+                                            </td>
+                                            <td class="text-center" width="10%">
+                                                <div class="action-btns">
+                                                    <a href="<?php echo e(route('admin_panel.social.edit',$social->id)); ?>" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تعديل">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                    </a>
+                                                    <a href="/admin_panel/del_social/<?php echo e($social->id); ?>" class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="حذف">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                    </a>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                    </tbody>
+
+                                </table>
+
+                            <div class="col-sm-12 col-md-7">
+                                    <?php echo e($socials->links()); ?>
+
+                            </div>
+
+                            </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  BEGIN FOOTER  -->
+    <?php echo $__env->make('admin.layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <!--  END FOOTER  -->
+
+
+
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.dashboard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/kcoae/stage.kco.ae/center/resources/views/admin/social/index.blade.php ENDPATH**/ ?>

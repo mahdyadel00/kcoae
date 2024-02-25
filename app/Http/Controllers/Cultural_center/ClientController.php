@@ -68,6 +68,8 @@ class ClientController extends Controller
                 return redirect()->back()->withErrors(['msg'=>'هذا الحساب غير موجود']);
             }
 
+            $client->update(['is_verify'=>1]);
+            
             DB::commit();
             session()->flash('success', 'تم التحقق بنجاح');
             return redirect('/');
