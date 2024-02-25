@@ -69,7 +69,7 @@ class ClientController extends Controller
             }
 
             $client->update(['is_verify'=>1]);
-            
+            auth('client')->login($client);
             DB::commit();
             session()->flash('success', 'تم التحقق بنجاح');
             return redirect('/');
