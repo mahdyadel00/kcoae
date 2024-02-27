@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -21,7 +23,8 @@ class AuthController extends Controller
     }
     public function home()
     {
-        $admin=auth()->user();
+        $admin = auth()->user();
+
         return redirect('/admin_panel/editWe');
     }
     public function login(Request $request)
@@ -30,26 +33,34 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-//    dd(  $request->session()->regenerate());
           if (auth()->attempt($credentials)) {
-//            $request->session()->regenerate();
+
             if(auth()->user()->type=='1'){
-                return redirect('/admin_panel/about');
+
+                return redirect('/admin_panel/orders');
             }else{
-                return redirect('/admin_panel/about');
+                return redirect('/admin_panel/orders');
             }
-
-
         }
-
         return back()->withErrors([
             'email' => 'كلمة المرور او البريد الالكتروني غير صحيح',
         ])->onlyInput('email');
     }
     public function logout(Request $request)
     {
-        auth()->logout();
-        return redirect(route('admin_login'));
+        try{
+            DB::beginTransaction();
+
+            auth()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            DB::commit();
+            return redirect()->route('admin_login');
+        }catch(\Exception $e){
+            DB::rollback();
+            Log::channel('single')->error('logout error: '.$e->getMessage()->getLine());
+            return redirect('/admin_panel/login');
+        }
     }
 //    public function switchLang($lang)
 //    {

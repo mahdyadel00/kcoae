@@ -3,29 +3,23 @@
 @section('content')
     <div id="content" class="main-content">
         <!--  BEGIN BREADCRUMBS  -->
-        @include('admin.layouts.secondary_nav',['title'=>'المستخدمون ','sub_title'=>''])
+        @include('admin.layouts.secondary_nav',['title'=>'المستفيدون ','sub_title'=>''])
         <br>
         <!--  END BREADCRUMBS  -->
         <div class="col-12" style="margin:2% 2% auto;">
             <div class="user-profile ">
                 <div class="widget-content widget-content-area">
                     @if(session()->has('message'))
-
                         <div class="alert alert-success">
-
                             {{ session()->get('message') }}
-
                         </div>
-
                     @endif
-
                     <div class="" style="padding: 2%;">
-
                         <div class="table-responsive" id="t1">
                             <table id="myTable1" class="table table-striped table-bordered table-sm">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" scope="col"></th>
+                                    <th class="text-center" scope="col">#</th>
                                     <th scope="col"> الاسم  </th>
                                     <th scope="col"> البريد الاكتروني  </th>
                                     <th scope="col">رقم الهاتف  </th>
@@ -35,17 +29,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                <?php $counter=1;?>
-                                @foreach($clients as $client)
+                                    @foreach($clients as $key=>$client)
 
                                     <tr>
                                         <td>
-                                            <p class="text-center">{{$counter}}</p>
+                                            <p class="text-center">{{$key+1}}</p>
                                             <span class="text-success"></span>
-                                            <?php $counter++;?>
                                         </td>
-
                                         <td>
                                             <p class="mb-0">{{$client->name}}</p>
                                             <span class="text-success"></span>
@@ -66,23 +56,19 @@
                                             <p class="mb-0">{{$client->created_at->toDateString()}}</p>
                                             <span class="text-success"></span>
                                         </td>
-
                                         <td class="text-center">
                                             <div class="action-btns">
-{{--                                                <a href="{{route('admin_panel.advisors.show',$myadmin->id)}}" class="action-btn btn-view bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="عرض">--}}
-{{--                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>--}}
-{{--                                                </a>--}}
+                                                <a href="{{route('admin_panel.clients.show',$client->id)}}" class="action-btn btn-view bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="عرض">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                                </a>
                                                 <a href="{{route('admin_panel.clients.edit',$client->id)}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تعديل">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                 </a>
-
-
                                             </div>
                                         </td>
                                     </tr>
 
                                 @endforeach
-
                                 </tbody>
 
                             </table>

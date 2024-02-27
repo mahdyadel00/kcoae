@@ -107,7 +107,7 @@
                                 </tbody>
 
                             </table>
-                               
+
                             <div class="col-sm-12 col-md-7">
                                     {{ $admins->links() }}
                             </div>

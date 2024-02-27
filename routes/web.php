@@ -63,6 +63,8 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
         Route::resource('admins', AdminController::class);
         Route::get('/admin_del/{id}', [AdminController::class, 'destroy']);
 
+        //Route Logout
+        Route::get('/logout', [AuthController::class, 'logout']);
         ## Admins Routes
         Route::get('/users', [AdminController::class, 'users']);
         Route::get('/create_user', [AdminController::class, 'create_user']);

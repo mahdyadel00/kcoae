@@ -16,20 +16,23 @@ class AdminController extends Controller
 
     public function index()
     {
-        $admin=auth()->user();
-        $admins=User::where('type','1')->orderBy('created_at', 'DESC')->paginate(15);
+        $admin      =  auth()->user();
+        $admins     =  User::where('type','1')->orderBy('created_at', 'DESC')->paginate(15);
+
         return view('admin.admins.index',['admin'=>$admin,'admins'=>$admins,'is_user'=>'0']);
     }
     public function users()
     {
-        $admin=auth()->user();
-        $admins=User::where('type','2')->orderBy('created_at', 'DESC')->paginate(15);
+        $admin  = auth()->user();
+        $admins = User::where('type','2')->orderBy('created_at', 'DESC')->paginate(15);
+
         return view('admin.admins.index',['admin'=>$admin,'admins'=>$admins,'is_user'=>'1']);
     }
 
     public function create()
     {
-        $admin=auth()->user();
+        $admin = auth()->user();
+        
         return view('admin.admins.create',['admin'=>$admin,'is_user'=>'0']);
 
     }

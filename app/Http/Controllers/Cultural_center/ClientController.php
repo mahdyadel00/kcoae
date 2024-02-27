@@ -86,22 +86,27 @@ class ClientController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'ID_number' => ['required'],
-            'password' => ['required'],
+            'ID_number' => ['required' , 'integer'],
+            'password' => ['required' , 'string'],
+        ] , [
+            'ID_number.required'    => 'حقل الرقم الوطني لا يجب أن يكون فارغا',
+            'ID_number.integer'     => 'الرقم الوطني يجب ان يتكون من أرقام فقط',
+            'password.required'     => 'حقل كلمة المرور لا يجب أن يكون فارغا',
+
         ]);
 
         if (auth('client')->attempt($credentials)) {
-            $user=Client::where('ID_number',$request->ID_number)->first();
+            $user   =   Client::where('ID_number',$request->ID_number)->first();
+
             if($user->is_verify=='1'){
+
                 $request->session()->regenerate();
+
                 return redirect('/');
             }
 
         }
-
-        return back()->withErrors([
-            'ID_number' => 'كلمة المرور او البريد الالكتروني غير صحيح',
-        ]);
+        return back()->withErrors(['msg'=>'الرجاء التأكد من صحة البيانات المدخلة']);
     }
 
     public function logout(Request $request)
