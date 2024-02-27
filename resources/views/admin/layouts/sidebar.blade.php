@@ -276,64 +276,59 @@
                 </ul>
             </li>
 
-            <li class="menu {{ ( (request()->is('*/government_contacts*'))|| (request()->is('*/higher_education*'))|| (request()->is('*/financial_dues*'))|| (request()->is('*/health_insurance*'))|| (request()->is('*/technical_support*'))|| (request()->is('*/student_guide*'))|| (request()->is('*/application_form*'))|| (request()->is('*/instructions*'))|| (request()->is('*/circulars*'))|| (request()->is('*/calendar*'))|| (request()->is('*/useful_links*'))|| (request()->is('*/short_news*'))|| (request()->is('*/sliders*')) )? 'active' : '' }}">
-                    <a href="#contact" data-bs-toggle="collapse" aria-expanded="{{(  (request()->is('*/government_contacts*'))|| (request()->is('*/higher_education*'))|| (request()->is('*/financial_dues*'))|| (request()->is('*/health_insurance*'))|| (request()->is('*/technical_support*'))|| (request()->is('*/student_guide*'))|| (request()->is('*/application_form*'))|| (request()->is('*/instructions*'))|| (request()->is('*/circulars*'))|| (request()->is('*/calendar*'))|| (request()->is('*/useful_links*')) || (request()->is('*/short_news*'))|| (request()->is('*/sliders*')) ) ? 'true' : 'false' }}" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                            <span>التواصل </span>
-                        </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/.svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
-                    </a>
+            <li class="menu {{ ( ( (request()->is('*/social*'))|| (request()->is('*/edit_mail*'))|| (request()->is('*/contact_us*'))) || (request()->is('*/edit_whatsapp*')) )? 'active' : '' }}">
+                <a href="#contact" data-bs-toggle="collapse" aria-expanded="{{(  (request()->is('*/social*'))|| (request()->is('*/edit_mail*'))  ) || (request()->is('*/contact_us*')) ? 'true' : 'false' }}" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span>التواصل </span>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/.svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
 
-                <li class="menu {{ (request()->is('*/social*')) ? 'active' : '' }}" id="contact" data-bs-parent="#accordionExample">
-                    <a href="{{route('admin_panel.social.index')}}" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tv"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                            <span>  التواصل الاجتماعي  </span>
-                        </div>
-                    </a>
-                </li>
+                <ul class="collapse submenu list-unstyled {{ ( (request()->is('*/contact_us*')) ) ? 'show' : ''}}" id="contact" data-bs-parent="#accordionExample">
+                    <li class="{{ (request()->is('*/contact_us*')) ? 'active' : '' }}">
+                        <a href="{{route('admin_panel.contact_us.index')}}">  تواصل معنا  </a>
+                    </li>
+                </ul>
 
-                @if($admin->type=='1')
-                    <li class="menu {{ (request()->is('*/edit_whatsapp*')) ? 'active' : '' }}" id="contact" data-bs-parent="#accordionExample">
-                        <a href="/admin_panel/edit_whatsapp" aria-expanded="false" class="dropdown-toggle">
+                <ul class="collapse submenu list-unstyled {{ ( (request()->is('*/social*'))|| (request()->is('*/edit_mail*')) ) ? 'show' : ''}}" id="contact" data-bs-parent="#accordionExample">
+                    <li class="{{ (request()->is('*/edit_mail*')) ? 'active' : '' }}">
+                        <a href="/admin_panel/edit_mail" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                <span>  WhatsApp </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                <span>  Mail </span>
                             </div>
                         </a>
                     </li>
-                @endif
-                <li class="menu {{ (request()->is('*/edit_mail*')) ? 'active' : '' }}" id="contact" data-bs-parent="#accordionExample">
-                    <a href="/admin_panel/edit_mail" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
-                            <span>  Mail </span>
-                        </div>
-                    </a>
-                </li>
+                </ul>
 
                 @if($admin->type=='1')
-                    <li class="menu {{ (request()->is('*/edit_call*')) ? 'active' : '' }}" id="contact" data-bs-parent="#accordionExample">
-                        <a href="/admin_panel/edit_call" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                <span>  رقم الاتصال </span>
-                            </div>
-                        </a>
-                    </li>
+                    <ul class="collapse submenu list-unstyled {{ (request()->is('*/edit_whatsapp*'))  ? 'show' : ''}}" id="contact" data-bs-parent="#accordionExample">
+                        <li class="{{ (request()->is('*/edit_whatsapp*')) ? 'active' : '' }}">
+                            <a href="/admin_panel/edit_whatsapp" aria-expanded="false" class="dropdown-toggle">
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <span>  WhatsApp </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 @endif
 
-                <li class="menu {{ (request()->is('*/contact_us*')) ? 'active' : '' }}" id="contact" data-bs-parent="#accordionExample">
-                    <a href="{{route('admin_panel.contact_us.index')}}" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                            <span>  اتصل بنا  </span>
-                        </div>
-                    </a>
-                </li>
+                @if($admin->type=='1')
+                    <ul class="collapse submenu list-unstyled {{ (request()->is('*/edit_call*'))  ? 'show' : ''}}" id="contact" data-bs-parent="#accordionExample">
+                        <li class="{{ (request()->is('*/edit_call*')) ? 'active' : '' }}">
+                            <a href="/admin_panel/edit_call" aria-expanded="false" class="dropdown-toggle">
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    <span>  رقم الاتصال </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                @endif
 
             </li>
 

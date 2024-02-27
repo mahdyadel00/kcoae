@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('code')->nullable();
             $table->string('is_verify')->nullable()->comment('0 not verified ,1 verified ')->default('0');
+            $table->boolean('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

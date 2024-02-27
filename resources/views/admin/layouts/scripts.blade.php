@@ -9,7 +9,7 @@
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="{{ asset('js/dash_1.js') }}"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-
+@stack('scripts')
 
 <!-- Icons -->
 {{--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--}}

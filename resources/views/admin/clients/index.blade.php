@@ -25,6 +25,7 @@
                                     <th scope="col">رقم الهاتف  </th>
                                     <th scope="col">الرقم الوطني  </th>
                                     <th scope="col">تاريخ الانضمام </th>
+                                    <th scope="col">الحالة</th>
                                     <th class="text-center" scope="col"></th>
                                 </tr>
                                 </thead>
@@ -56,6 +57,18 @@
                                             <p class="mb-0">{{$client->created_at->toDateString()}}</p>
                                             <span class="text-success"></span>
                                         </td>
+                                        <td>
+                                            <p class="mb-0">
+                                                <input type="checkbox" class="switch" data-switch="success" name="is_active" data-id="{{$client->id}}" {{ $client->is_active == 1 ? 'checked' : '' }}>
+                                            </p>
+                                            <span class="text-success">
+                                                @if($client->is_active == 1)
+                                                    مفعل
+                                                @else
+                                                    غير مفعل
+                                                @endif
+                                            </span>
+                                        </td>
                                         <td class="text-center">
                                             <div class="action-btns">
                                                 <a href="{{route('admin_panel.clients.show',$client->id)}}" class="action-btn btn-view bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="عرض">
@@ -70,134 +83,42 @@
 
                                 @endforeach
                                 </tbody>
-
                             </table>
-
-                            <div class="col-sm-12 col-md-7">
-                                    {{ $clients->links() }}
-                            </div>
+                            <div class="col-sm-12 col-md-7">{{ $clients->links() }}</div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-        <!--  BEGIN FOOTER  -->
-
-    <!--  END FOOTER  -->
-        <script type="text/javascript">
-            $('#search').on('keyup',function(){
-                $value=$(this).val();
-                $.ajax({
-                    type : 'get',
-                    url : '{{URL::to('/admin_panel/search_advisor')}}',
-                    data:{'search':$value},
-                    success:function(data){
-                        $('#t1').html(data);
-                    }
-                });
-            })
-        </script>
-        <script type="text/javascript">
-            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-        </script>
-{{--        <script>--}}
-
-{{--            addPagerToTables('#myTable1', 4);--}}
-
-{{--            function addPagerToTables(tables, rowsPerPage = 10) {--}}
-
-{{--                tables =--}}
-{{--                    typeof tables == "string"--}}
-{{--                        ? document.querySelectorAll(tables)--}}
-{{--                        : tables;--}}
-
-{{--                for (let table of tables)--}}
-{{--                    addPagerToTable(table, rowsPerPage);--}}
-
-{{--            }--}}
-
-{{--            function addPagerToTable(table, rowsPerPage = 10) {--}}
-
-{{--                let tBodyRows = getBodyRows(table);--}}
-{{--                let numPages = Math.ceil(tBodyRows.length/rowsPerPage);--}}
-
-{{--                let colCount =--}}
-{{--                    [].slice.call(--}}
-{{--                        table.querySelector('tr').cells--}}
-{{--                    )--}}
-{{--                        .reduce((a,b) => a + parseInt(b.colSpan), 0);--}}
-
-{{--                table--}}
-{{--                    .createTFoot()--}}
-{{--                    .insertRow()--}}
-{{--                    .innerHTML = `<td colspan=${colCount}><div class="nav"></div></td>`;--}}
-
-{{--                if(numPages == 1)--}}
-{{--                    return;--}}
-
-{{--                for(i = 0;i < numPages;i++) {--}}
-
-{{--                    let pageNum = i + 1;--}}
-
-{{--                    table.querySelector('.nav')--}}
-{{--                        .insertAdjacentHTML(--}}
-{{--                            'beforeend',--}}
-{{--                            `<a href="#" rel="${i}">${pageNum}</a> `--}}
-{{--                        );--}}
-
-{{--                }--}}
-
-{{--                changeToPage(table, 1, rowsPerPage);--}}
-
-{{--                for (let navA of table.querySelectorAll('.nav a'))--}}
-{{--                    navA.addEventListener(--}}
-{{--                        'click',--}}
-{{--                        e => changeToPage(--}}
-{{--                            table,--}}
-{{--                            parseInt(e.target.innerHTML),--}}
-{{--                            rowsPerPage--}}
-{{--                        )--}}
-{{--                    );--}}
-
-{{--            }--}}
-
-{{--            function changeToPage(table, page, rowsPerPage) {--}}
-
-{{--                let startItem = (page - 1) * rowsPerPage;--}}
-{{--                let endItem = startItem + rowsPerPage;--}}
-{{--                let navAs = table.querySelectorAll('.nav a');--}}
-{{--                let tBodyRows = getBodyRows(table);--}}
-
-{{--                for (let nix = 0; nix < navAs.length; nix++) {--}}
-
-{{--                    if (nix == page - 1)--}}
-{{--                        navAs[nix].classList.add('active');--}}
-{{--                    else--}}
-{{--                        navAs[nix].classList.remove('active');--}}
-
-{{--                    for (let trix = 0; trix < tBodyRows.length; trix++)--}}
-{{--                        tBodyRows[trix].style.display =--}}
-{{--                            (trix >= startItem && trix < endItem)--}}
-{{--                                ? 'table-row'--}}
-{{--                                : 'none';--}}
-
-{{--                }--}}
-
-{{--            }--}}
-
-{{--            // tbody might still capture header rows if--}}
-{{--            // if a thead was not created explicitly.--}}
-{{--            // This filters those rows out.--}}
-{{--            function getBodyRows(table) {--}}
-{{--                let initial = table.querySelectorAll('tbody tr');--}}
-{{--                return Array.from(initial)--}}
-{{--                    .filter(row => row.querySelectorAll('td').length > 0);--}}
-{{--            }--}}
-{{--        </script>--}}
-
     </div>
-
-
-
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
+    <script>
+        $('.switch').change(function() {
+            var is_active = $(this).prop('checked') === true ? 1 : 0;
+            var client_id = $(this).data('id');
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '{{route('admin_panel.clients.change_status')}}',
+                data: {'is_active': is_active, 'client_id': client_id},
+                success: function(data){
+                    Swal.fire({
+                        title: 'تم تغيير حالة المستفيد بنجاح',
+                        icon: 'success',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    //load the table again
+                    $('#t1').load(document.URL +  ' #t1');
+                }
+            });
+        })
+    </script>
+@endpush

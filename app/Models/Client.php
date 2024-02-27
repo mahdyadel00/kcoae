@@ -37,6 +37,10 @@ class Client extends Authenticatable
         'work_place',
         'code',
         'is_verify',
+        'is_active',
+    ];
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
     protected $hidden = ['password', 'remember_token',];
 

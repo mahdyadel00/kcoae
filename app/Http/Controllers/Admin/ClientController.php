@@ -92,6 +92,29 @@ class ClientController extends Controller
         ]);
 
         return redirect(route('admin_panel.clients.index'))->with(['message'=>'تم التعديل بنجاح']);
+    }
 
+    protected function changeStatus(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $client = Client::where('id',$request->client_id)->first();
+
+            if(!$client){
+                return redirect()->back()->withErrors(['msg'=>'هذا العميل غير موجود']);
+            }
+
+            $client->update([
+                'is_active' => $request->is_active
+            ]);
+
+            DB::commit();
+            return response()->json(['status'=>true,'message'=>'تم تغيير الحالة بنجاح']);
+
+        }catch(\Exception $ex){
+            DB::rollback();
+            Log::channel('custom')->error($ex->getMessage());
+            return response()->json(['status'=>false,'message'=>'حدث خطأ ما']);
+        }
     }
 }

@@ -109,6 +109,8 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
 
         ## clients Routes
         Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
+        //change client status
+        Route::get('/change_status', [\App\Http\Controllers\Admin\ClientController::class, 'changeStatus'])->name('clients.change_status');
 
         ## News Routes
         Route::resource('news', NewsController::class);
