@@ -114,7 +114,9 @@
                 <input name="passport_image" type="file" placeholder="صورة جواز السفر (تحميل صور فقط)"  style="padding: 3px">
               </div>
             </div>
-            
+            <div class="input-box">
+            <button class="btn" type="submit">حفظ</button>
+            </div>
           </form>
         </div>
       </div>
