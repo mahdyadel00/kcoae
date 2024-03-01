@@ -114,23 +114,7 @@
                 <input name="passport_image" type="file" placeholder="صورة جواز السفر (تحميل صور فقط)"  style="padding: 3px">
               </div>
             </div>
-            <div class="main">
-                  <div class="boxing">
-                      <h2 style="color: #143665;">تغيير كلمة السر
-                      </h2>
-                      <div class="content" style="width:100%;">
-                          <div class="user-details">
-                              <div class="input-box" style="width: 100%;">
-                                  <label class="details required"> تغيير كلمة السر </label>
-                                  <input name="password" type="password" placeholder="ادخل كلمه السر الجديده"  style="width: 100%;">
-                              </div>
-                          </div>
-                          <div class="input-box">
-                              <button class="btn" type="submit">حفظ</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            
           </form>
         </div>
       </div>
