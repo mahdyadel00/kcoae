@@ -7,7 +7,7 @@
     <div class="contact-page pt-80 pb-80">
         <div class="container">
             <div class="contact-form">
-                <div class="row">
+                <div class="row" style="display: flex;justify-content: space-around;flex-wrap: wrap;">
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12" style="margin:auto;">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -69,7 +69,7 @@
                                             </div>
                                             </div>
                                             <div class="pt-5" style="display: flex;justify-content: space-between;flex-wrap: wrap;">
-                                                <a href="{{ route('login_form') }}"  class="btn">  دخول للحساب </a>
+                                                <!-- <a href="{{ route('login_form') }}"  class="btn">  دخول للحساب </a> -->
                                                 <a href="{{ route('forget_password') }}"  class="btn"> هل نسيت كلمة المرور </a>
                                             </div>
                                         </form>
@@ -79,7 +79,10 @@
                             <!-- END COMMENT RESPOND -->
                         </div>
                     </div>
-
+                    <div class="pt-5 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12" >
+                    <a href="{{ route('login_form') }}"  class="btn btn-button btn-button-1 blue-bg">  دخول للحساب </a>
+                    <!-- <a href="{{ route('forget_password') }}"  class="btn"> هل نسيت كلمة المرور </a> -->
+                    </div>
                 </div>
             </div>
         </div>
