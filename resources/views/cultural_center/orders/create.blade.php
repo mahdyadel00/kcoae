@@ -12,7 +12,7 @@
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                         <div class="comment-area mb-5">
                             <div class="comment-respond">
-                                <h2>إدخال الأوراق الثبوتية المطلوبة</h2>
+                                <h2>متطلبات الحصول على شهادة لامانع</h2>
                                 <div class="respons-box pt-4">
                                     @if(session()->has('message'))
 
@@ -29,32 +29,32 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="name">صوره طبق الاصل عن شهادة شهادة الثانوية العامة</label>
+                                                        <label for="name">شهادة الثانوية</label>
                                                         <input id="name" class="form-control form-mane" required="" type="file" name="high_school_certificate">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="email">التامينات الاجتماعية</label>
+                                                        <label for="email">شهادة التأمينات الإجتماعية</label>
                                                         <input id="email" class="form-control form-email" required="" type="file" name="social_security">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="name">شهادة حسن السيرة والسلوك  </label>
-                                                        <input id="name" class="form-control form-mane" required="" type="file" name="good_conduct_certificate">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="name">جواز السفر  </label>
+                                                        <label for="name">صورة جواز السفر </label>
                                                         <input id="name" class="form-control form-mane" required="" type="file" name="passport">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="name"> البطاقة المدنية </label>
+                                                        <label for="name"> صورة البطاقة المدنية</label>
                                                         <input id="name" class="form-control form-mane" required="" type="file" name="national_ID">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="name">التخصص المطلوب  </label>
+                                                        <input id="name" class="form-control form-mane" required="" type="file" name="good_conduct_certificate">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">

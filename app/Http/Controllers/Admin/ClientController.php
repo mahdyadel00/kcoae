@@ -7,6 +7,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ClientController extends Controller
@@ -107,7 +108,7 @@ class ClientController extends Controller
             $client->update([
                 'is_active' => $request->is_active
             ]);
-
+            Mail::to($client->email)->send(new MyMail(['name'=>$client->name,'status'=>$request->is_active]));
             DB::commit();
             return response()->json(['status'=>true,'message'=>'تم تغيير الحالة بنجاح']);
 

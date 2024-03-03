@@ -9,13 +9,16 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index(){
-        $client=auth('client')->user();
-        $orders=Order::where('client_id',$client->id)->orderBy('created_at','desc')->get();
+
+        $client =   auth('client')->user();
+        $orders =   Order::where('client_id',$client->id)->orderBy('created_at','desc')->get();
+
         return view ('cultural_center.orders.index',['orders'=>$orders]);
     }
 
     public function show($id){
-        $order=Order::find($id);
+        $order  =   Order::find($id);
+
         return view('cultural_center.orders.item',['order'=>$order]);
     }
 

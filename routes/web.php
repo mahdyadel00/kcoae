@@ -220,8 +220,13 @@ Route::group(['middleware' => 'auth:client'], function () {
 //    Route::post('/edit_profile', [ClientController::class,'edit_profile']);
     Route::put('/edit_profile', [ClientController::class,'updateProfile'])->name('edit_profile');
     Route::post('/edit_password', [ClientController::class,'edit_password']);
+    //Route My File
+    Route::get('/my_files', [ClientController::class, 'showMyFiles'])->name('my_files');
     ## Orders Routes
     Route::resource('orders', \App\Http\Controllers\Cultural_center\OrderController::class);
+    //Route Order Data
+    Route::get('/order_data', [ClientController::class, 'orderData'])->name('order_data');
+
 
     Route::get('/logout', [ClientController::class, 'logout']);
 });
@@ -229,10 +234,10 @@ Route::group(['middleware' => 'auth:client'], function () {
 ## All Routs
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class,'showAbout']);
-//Route::get('/electronic-gate', [HomeController::class, 'showGate']);
+Route::get('/electronic-gate', [HomeController::class, 'showGate']);
 Route::get('/office', [HomeController::class, 'showOffice']);
 Route::get('/worker', [HomeController::class,'showWorker']);
-Route::get('/paper', [HomeController::class, 'showPaper']);
+Route::get('/paper', [HomeController::class, 'showPaper'])->name('paper');
 Route::get('/contact', [HomeController::class, 'showContact']);
 
 ## home page

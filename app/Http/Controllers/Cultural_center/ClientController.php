@@ -267,7 +267,24 @@ class ClientController extends Controller
          return redirect()->back()->with(['message'=>'تم التعديل بنجاح']);
      }
 
+    }
 
+    public function showMyFiles(){
+        try{
+            DB::beginTransaction();
+            $client = auth('client')->user();
+
+            if(!$client){
+                return redirect()->back()->withErrors(['msg'=>'هذا الحساب غير موجود']);
+            }
+
+            DB::commit();
+            return view('client.my_files',compact('client'));
+        }catch (\Exception $e){
+            DB::rollBack();
+            Log::channel('custom')->error($e->getMessage());
+            return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
+        }
     }
 
 }

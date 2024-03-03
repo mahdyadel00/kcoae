@@ -108,8 +108,9 @@ class HomeController extends Controller
     }
 
     function showPaper () {
-        $order_note=About::where('name','order_note')->first();
-        return view ('cultural_center.Papers-required',['order_note'=>$order_note]);
+        $order_note  = About::where('name','order_note')->first();
+
+        return view ('cultural_center.Papers-required',compact('order_note'));
     }
 
     function showContact () {
