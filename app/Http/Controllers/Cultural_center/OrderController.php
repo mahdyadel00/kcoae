@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Cultural_center;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Note;
 use App\Models\Order;
+use App\Models\Specialty;
+use App\Models\SubSpecialty;
+use App\Models\University;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -111,11 +118,31 @@ class OrderController extends Controller
             $data["birth_certificate"]=$filename;
         }
 
-        $client=auth('client')->user();
-        $data["client_id"]=$client->id;
-        $order=Order::create($data);
-//        return $order;
+        $client =   auth('client')->user();
+        $data["client_id"]  =$client->id;
+        $order      =   Order::create($data);
 
-        return redirect()->back()->with('message', 'تم تسجيل طلبك بنجاح');
+        return redirect()->route('search');
     }
+
+    public function search(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $countries          = Country::orderBy('created_at', 'desc')->get();
+            $universities       = University::orderBy('created_at', 'desc')->get();
+            $specialties        = Specialty::orderBy('created_at', 'desc')->get();
+            $sub_specialties    = SubSpecialty::orderBy('created_at', 'desc')->get();
+            $notes              = Note::orderBy('created_at', 'desc')->get();
+
+            DB::commit();
+            return view('cultural_center.orders.search' , compact('countries', 'universities', 'specialties', 'sub_specialties', 'notes'));
+        }catch (\Exception $e){
+            DB::rollback();
+            Log::channel('custom')->error('Error in OrderController/search, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
+            return redirect()->back()->with('error', 'Error, Please try again');
+        }
+    }
+
+
 }

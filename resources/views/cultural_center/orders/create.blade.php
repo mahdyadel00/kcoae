@@ -65,7 +65,7 @@
                                                 </div>
                                             </div>
                                             <div class="buttons pt-4">
-                                                <button type="submit" class="btn btn-button btn-button-1 blue-bg">ارسال</button>
+                                                <button type="submit" class="btn btn-button btn-button-1 blue-bg">التالي</button>
                                             </div>
                                         </form>
                                     </div>

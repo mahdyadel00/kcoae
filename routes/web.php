@@ -38,6 +38,7 @@ use App\Http\Controllers\Cultural_center\ClientController;
 use App\Http\Controllers\Cultural_center\HomeController;
 use App\Http\Controllers\Cultural_center\ListController;
 use App\Http\Controllers\Admin\StudentGuideController;
+use App\Http\Controllers\Cultural_center\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -227,6 +228,8 @@ Route::group(['middleware' => 'auth:client'], function () {
     //Route Order Data
     Route::get('/order_data', [ClientController::class, 'orderData'])->name('order_data');
 
+    //Route Search
+    Route::get('/search', [OrderController::class, 'search'])->name('search');
 
     Route::get('/logout', [ClientController::class, 'logout']);
 });
