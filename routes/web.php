@@ -230,6 +230,8 @@ Route::group(['middleware' => 'auth:client'], function () {
 
     //Route Search
     Route::get('/search', [OrderController::class, 'search'])->name('search');
+    //Route Add Search
+    Route::get('/add_search', [OrderController::class, 'addSearch'])->name('add_search');
 
     Route::get('/logout', [ClientController::class, 'logout']);
 });
@@ -270,6 +272,8 @@ Route::get('/news-details/{id}', [\App\Http\Controllers\Cultural_center\NewsCont
 ## University Routes
 Route::get('/university', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'index']);
 Route::get('/search_university', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'search']);
+//Route Add Search
+Route::get('/add_search_university', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'addSearch'])->name('add_search_university');
 ## get universities belongs to specific country
 Route::post('country',  [\App\Http\Controllers\Cultural_center\UniversityController::class, 'country'])->name('country');
 

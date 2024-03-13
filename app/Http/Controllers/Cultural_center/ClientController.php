@@ -64,18 +64,22 @@ class ClientController extends Controller
             DB::beginTransaction();
             $client = Client::where('code', $request->code)->first();
 
+
             if(!$client){
                 return redirect()->back()->withErrors(['msg'=>'هذا الحساب غير موجود']);
             }
 
             $client->update(['is_verify'=>1]);
+
             auth('client')->login($client);
+
             DB::commit();
             session()->flash('success', 'تم التحقق بنجاح');
             return redirect('/');
 
         }catch (\Exception $e){
             DB::rollBack();
+            dd ($e->getMessage());
             Log::channel('custom')->error($e->getMessage());
             return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
 

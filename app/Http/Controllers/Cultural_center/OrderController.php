@@ -119,8 +119,8 @@ class OrderController extends Controller
         }
 
         $client =   auth('client')->user();
-        $data["client_id"]  =$client->id;
-        $order      =   Order::create($data);
+        $data["client_id"]  =   $client->id;
+        $order              =   Order::create($data);
 
         return redirect()->route('search');
     }
@@ -143,6 +143,4 @@ class OrderController extends Controller
             return redirect()->back()->with('error', 'Error, Please try again');
         }
     }
-
-
 }
