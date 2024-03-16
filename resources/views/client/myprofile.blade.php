@@ -119,7 +119,7 @@
               </div>
             </div>
             <div class="input-box">
-            <button class="btn" type="submit">حفظ</button>
+            <button class="btn" type="submit" {{ $client->is_active == 1 ? 'disabled' : '' }}>حفظ</button>
             </div>
           </form>
         </div>
