@@ -81,17 +81,17 @@ class ClientController extends Controller
             $client = Client::find($id);
 
             if(!$client){
-                return redirect()->back()->withErrors(['msg'=>'هذا العميل غير موجود']);
+                return response()->json(['msg'=>'هذا العميل غير موجود'], 404);
             }
 
             $client->delete();
 
             DB::commit();
-            return redirect(route('admin_panel.clients.index'))->with(['message'=>'تم الحذف بنجاح']);
+            return response()->json(['msg'=>'تم الحذف بنجاح'], 200);
         } catch (\Exception $ex) {
             DB::rollback();
             Log::channel('custom')->error($ex->getMessage());
-            return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
+            return response()->json(['msg'=>'حدث خطأ ما'], 500);
         }
     }
 

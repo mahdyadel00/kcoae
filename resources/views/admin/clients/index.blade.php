@@ -74,13 +74,10 @@
                                                 <a href="{{route('admin_panel.clients.edit',$client->id)}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تعديل">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                 </a>
-                                                <form action="{{ route('admin_panel.clients.destroy', $client->id)}}" method="post" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="حذف" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M16 6l-1 18H8l-1-18"></path><path d="M2 10l2-1 2-1 2-1 2-1 2-1 2-1 2-1 2-1"></path></svg>
-                                                    </button>
-                                                </form>
+                                                <a href="javascript:void(0)" class="action-btn btn-delete bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="حذف" onclick="deleteClient({{$client->id}})">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M16 6l-1 18H8l-1-18"></path><path d="M2 10l2 18h16l2-18"></path></svg>
+                                                </a>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -100,7 +97,44 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript">
-        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function deleteClient(id){
+            Swal.fire({
+                title: 'هل انت متأكد من حذف المستفيد؟',
+                text: "لن تتمكن من التراجع عن هذا الاجراء!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم, قم بالحذف!',
+                cancelButtonText: 'الغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '{{route('admin_panel.clients.destroy','')}}'+'/'+id,
+                        data: {
+                            id: id
+                        },
+                        success: function (data) {
+                            Swal.fire({
+                                title: 'تم حذف المستفيد بنجاح',
+                                icon: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            //load the table again
+                            $('#t1').load(document.URL +  ' #t1');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 {{--    <script>--}}
 {{--        $('.switch').change(function() {--}}
