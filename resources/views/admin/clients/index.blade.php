@@ -74,6 +74,13 @@
                                                 <a href="{{route('admin_panel.clients.edit',$client->id)}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تعديل">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                 </a>
+                                                <form action="{{ route('admin_panel.clients.destroy', $client->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="حذف" type="submit">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M16 6l-1 18H8l-1-18"></path><path d="M2 10l2-1 2-1 2-1 2-1 2-1 2-1 2-1 2-1"></path></svg>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

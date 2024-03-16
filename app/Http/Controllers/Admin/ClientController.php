@@ -73,4 +73,26 @@ class ClientController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $client = Client::find($id);
+
+            if(!$client){
+                return redirect()->back()->withErrors(['msg'=>'هذا العميل غير موجود']);
+            }
+
+            $client->delete();
+
+            DB::commit();
+            return redirect(route('admin_panel.clients.index'))->with(['message'=>'تم الحذف بنجاح']);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Log::channel('custom')->error($ex->getMessage());
+            return redirect()->back()->withErrors(['msg'=>'حدث خطأ ما']);
+        }
+    }
+
 }
