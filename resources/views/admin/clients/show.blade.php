@@ -80,7 +80,7 @@
 
                                     <tr>
                                         <th class="text-center" scope="col">صورة جواز السفر</th>
-                                        <th class="text-center" scope="col"><img src="{{asset('uploads/clients/'.$client->passport_image)}}" alt="passport_image" style="width: 100px; height: 100px;"></th>
+                                        <th class="text-center" scope="col"><img src="{{asset('uploads/clients/'.$client->passport_image)}}" alt="صورة جواز السفر" style="width: 100px; height: 100px;"></th>
                                     </tr>
 
 
@@ -116,7 +116,7 @@
 
                                     <tr>
                                         <th class="text-center" scope="col">تاريخ الميلاد</th>
-                                        <th class="text-center" scope="col">{{ date('Y-m-d', strtotime($client->date_of_birth)) }}</th>
+                                        <th class="text-center" scope="col">{{ $client->date_of_birth ? date('Y-m-d', strtotime($client->date_of_birth)) : '' }}</th>
                                     </tr>
 
                                     <tr>
@@ -124,8 +124,10 @@
                                         <th class="text-center" scope="col">
                                             @if( $client->gender == 'male' )
                                                 ذكر
-                                            @else
+                                            @elseif( $client->gender == 'female' )
                                                 أنثى
+                                            @else
+
                                             @endif
                                         </th>
                                     </tr>
@@ -138,13 +140,13 @@
                                     <tr>
                                         <th class="text-center" scope="col">الحالة الإجتماعية</th>
                                         <th class="text-center" scope="col">
-                                            @if( $client->marital_status == 'single' )
+                                            @if( $client->material_status == 'single' )
                                                 أعزب
-                                            @elseif( $client->marital_status == 'married' )
+                                            @elseif( $client->material_status == 'married' )
                                                 متزوج
-                                            @elseif( $client->marital_status == 'divorced' )
+                                            @elseif( $client->material_status == 'divorced' )
                                                 مطلق
-                                            @elseif( $client->marital_status == 'widowed' )
+                                            @elseif( $client->material_status == 'widowed' )
                                                 أرمل
                                             @endif
                                         </th>

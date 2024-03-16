@@ -31,8 +31,8 @@
                                             data-toggle="dropdown">{{auth('client')->user()->name}} </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="{{route('orders.index')}}">طلباتي</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('my_files') }}">ملفاتي</a></li>
-                                            <li><a class="dropdown-item" href="/profile">بياناتي</a></li>
+                                            <li><a class="dropdown-item" href="/profile">البيانات الشخصية</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('my_files') }}">بيانات الحساب</a></li>
                                             <li><a class="dropdown-item" href="/logout">تسجيل الخروج</a></li>
                                         </ul>
                                     </li>
