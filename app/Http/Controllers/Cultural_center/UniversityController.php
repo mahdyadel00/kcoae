@@ -100,7 +100,7 @@ class UniversityController extends Controller
 
                     $output.='      <tr>
                                 <td>
-                                    <input type="checkbox" name="university_id[]" value="'.$university->id.'" id="university_id'.$counter.'" class="mahdy">
+                                    <input type="checkbox" name="university_id[]" value="'.$university->id.'" id="university_id'.$counter.'" >
                                 </td>
                                 <td>'.$university->country->name.'</td>
                                 <td>'.$university->name.'</td>
@@ -131,13 +131,11 @@ class UniversityController extends Controller
                 $output.='</table>';
                 return Response($output);
 
-                //where clieck id store move data to another table id newResult when cecked class mahdy
-                //if not checked remove from newResult
-
             }
 
         }
     }
+
 
 
     public function addSearch(Request $request)
@@ -149,29 +147,6 @@ class UniversityController extends Controller
 
             $universities = University::where('sub_specialty_id', $request->subcategory)
                 ->get();
-//            when($request->search_country, function ($query) use ($request) {
-//                return $query->where('country_id', $request->country);
-//            })
-//                ->when($request->search_university, function ($query) use ($request) {
-//                    return $query->where('id', $request->university);
-//                })
-//                ->when($request->search_specialty, function ($query) use ($request) {
-//                    return $query->where('specialty_id', $request->category);
-//                })
-//                ->when($request->search_sub_specialty, function ($query) use ($request) {
-//                    return $query->where('sub_specialty_id', $request->subcategory);
-//                })
-//                ->when($request->search_Bachelor, function ($query) use ($request) {
-//                    return $query->where('Bachelor', $request->Bachelor);
-//                })
-//                ->when($request->search_master, function ($query) use ($request) {
-//                    return $query->where('master', $request->master);
-//                })
-//                ->when($request->search_doctor, function ($query) use ($request) {
-//                    return $query->where('doctor', $request->doctor);
-//                })
-//                ->get();
-//            dd($universities);
 
             if($universities)
             {$counter=1;
@@ -187,14 +162,14 @@ class UniversityController extends Controller
                                 <th>آخر تحديث</th>
                             </tr>
                             ';
-                foreach ($universities as $university){
 
-                    $output.='      <tr>
+                    foreach ($universities as $university){
 
-                                <td>'.$university->country->name.'</td>
-                                <td>'.$university->name.'</td>
-                                <td>'.$university->specialty->name.'</td>
-                                <td>'.$university->sub_specialty->name.'</td>';
+                    $output.='  <tr>
+                                    <td>'.$university->country->name.'</td>
+                                    <td>'.$university->name.'</td>
+                                    <td>'.$university->specialty->name.'</td>
+                                    <td>'.$university->sub_specialty->name.'</td>';
                     if($university->Bachelor==1){
                         $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
                     }elseif ($university->Bachelor==0){

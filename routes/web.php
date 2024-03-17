@@ -234,6 +234,9 @@ Route::group(['middleware' => 'auth:client'], function () {
     //Route Add Search
     Route::get('/add_search', [OrderController::class, 'addSearch'])->name('add_search');
 
+    //Route Add Order University
+    Route::post('/add_order_university', [OrderController::class, 'addOrderUniversity'])->name('add_order_university');
+
     Route::get('/logout', [ClientController::class, 'logout']);
 });
 

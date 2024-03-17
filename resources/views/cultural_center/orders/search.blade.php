@@ -66,48 +66,70 @@
         </div>
         <!-- end card -->
         <div class="card table-card">
-            <div class="card-body">
-                <div class="card-t-1">
+            <form action="{{ route('add_order_university') }}" method="post" id="store_form">
+                @csrf
+                <div class="card-body">
+                    <div class="card-t-1">
 
-                    <button class="dt-button btn-button-1" id="print" onClick="printPageArea('newResult')">
-                            <span class="print-button__content  js__action--print" title="Print this page">طباعة
-                           </span>
-                    </button>
-                </div>
-                <div id="newResult">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>الدولة</th>
-                            <th>الولاية</th>
-                            <th>الجامعة</th>
-                            <th>التخصص</th>
-                            <th>التخصص الفرعي</th>
-                            <th>بكالوريوس</th>
-                            <th>ماجستير</th>
-                            <th>دكتوراه</th>
-                            <th>ملاحظات</th>
-                            <th>آخر تحديث</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr id = "newResult">
-                                <td id="country"></td>
-                                <td id="state"></td>
-                                <td id="university"></td>
-                                <td id="category"></td>
-                                <td id="subcategory"></td>
-                                <td id="Bachelor"></td>
-                                <td id="master"></td>
-                                <td id="doctor"></td>
-                                <td id="notes"></td>
-                                <td id="updated_at"></td>
-
+                        <button class="dt-button btn-button-1" type="submit">
+                            <span class="print-button__content  js__action--print" title="Print this page">إرسال</span>
+                        </button>
+                    </div>
+                    <div id="newResult">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>الدولة</th>
+                                <th>الولاية</th>
+                                <th>الجامعة</th>
+                                <th>التخصص</th>
+                                <th>التخصص الفرعي</th>
+                                <th>بكالوريوس</th>
+                                <th>ماجستير</th>
+                                <th>دكتوراه</th>
+                                <th>ملاحظات</th>
+                                <th>آخر تحديث</th>
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+
+                            <tr id ="newResult">
+                                <td id="country">
+                                    <input type="hidden" name="country" value="">
+                                </td>
+                                <td id="state">
+                                    <input type="hidden" name="state" value="">
+                                </td>
+                                <td id="university">
+                                    <input type="hidden" name="university" value="">
+                                </td>
+                                <td id="category">
+                                    <input type="hidden" name="category" value="">
+                                </td>
+                                <td id="subcategory">
+                                    <input type="hidden" name="subcategory" value="">
+                                </td>
+                                <td id="Bachelor">
+                                    <input type="hidden" name="Bachelor" value="">
+                                </td>
+                                <td id="master">
+                                    <input type="hidden" name="master" value="">
+                                </td>
+                                <td id="doctor">
+                                    <input type="hidden" name="doctor" value="">
+                                </td>
+                                <td id="notes">
+                                    <input type="hidden" name="notes" value="">
+                                </td>
+                                <td id="updated_at">
+                                    <input type="hidden" name="updated_at" value="">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- danger-section -->
         @foreach($notes as $note)
@@ -123,11 +145,6 @@
             </div>
             <div class="card-body">
                 <div class="card-t-1">
-
-                    <button class="dt-button btn-button-1" id="print" onClick="printPageArea('result')">
-                            <span class="print-button__content  js__action--print" title="Print this page">طباعة
-                           </span>
-                    </button>
 
                     <button class="dt-button btn-button-1" id="store">
                             <span class="print-button__content  js__action--print" title="Print this page">إضافة</span>
