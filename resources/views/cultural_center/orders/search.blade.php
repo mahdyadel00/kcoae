@@ -66,14 +66,14 @@
         </div>
         <!-- end card -->
         <div class="card table-card">
-            <form action="{{ route('add_order_university') }}" method="post" id="store_form">
+            <form action="{{ route('add_order_university') }}" method="post">
                 @csrf
                 <div class="card-body">
                     <div class="card-t-1">
-
                         <button class="dt-button btn-button-1" type="submit">
-                            <span class="print-button__content  js__action--print" title="Print this page">إرسال</span>
+                            <span class="print-button__content  js__action--print" title="إرسال">إرسال</span>
                         </button>
+
                     </div>
                     <div id="newResult">
                         <table>
@@ -92,39 +92,56 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr id ="newResult">
-                                <td id="country">
-                                    <input type="hidden" name="country" value="">
-                                </td>
-                                <td id="state">
-                                    <input type="hidden" name="state" value="">
-                                </td>
-                                <td id="university">
-                                    <input type="hidden" name="university" value="">
-                                </td>
-                                <td id="category">
-                                    <input type="hidden" name="category" value="">
-                                </td>
-                                <td id="subcategory">
-                                    <input type="hidden" name="subcategory" value="">
-                                </td>
-                                <td id="Bachelor">
-                                    <input type="hidden" name="Bachelor" value="">
-                                </td>
-                                <td id="master">
-                                    <input type="hidden" name="master" value="">
-                                </td>
-                                <td id="doctor">
-                                    <input type="hidden" name="doctor" value="">
-                                </td>
-                                <td id="notes">
-                                    <input type="hidden" name="notes" value="">
-                                </td>
-                                <td id="updated_at">
-                                    <input type="hidden" name="updated_at" value="">
-                                </td>
-                            </tr>
+                                @foreach($search_universities as $search_university)
+                                    <tr id ="newResult">
+                                        <td>{{$search_university->country->name}}
+                                            <input type="hidden" name="country_id[]" value="{{$search_university->country->id}}">
+                                        </td>
+                                        <td>{{$search_university->name}}
+                                            <input type="hidden" name="name[]" value="{{$search_university->name}}">
+                                        </td>
+                                        <td>{{$search_university->specialty->name}}
+                                            <input type="hidden" name="specialty_id[]" value="{{$search_university->specialty->name}}">
+                                        </td>
+                                        <td>{{$search_university->sub_specialty->name}}
+                                            <input type="hidden" name="specialty_id" value="{{$search_university->specialty->id}}">
+                                        </td>
+                                        <td>{{$search_university->sub_specialty->name}}
+                                            <input type="hidden" name="sub_specialty_id[]" value="{{$search_university->sub_specialty->id}}">
+                                        </td>
+                                        <td>
+                                            @if($search_university->Bachelor == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                            <input type="hidden" name="Bachelor[]" value="{{$search_university->Bachelor}}">
+                                        </td>
+                                        <td>
+                                            @if($search_university->master == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                            <input type="hidden" name="master[]" value="{{$search_university->master}}">
+                                        <td>
+                                            @if($search_university->doctor == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                            <input type="hidden" name="doctor[]" value="{{$search_university->doctor}}">
+                                        </td>
+                                        <td>
+                                            {{ $search_university->note }}
+                                            <input type="hidden" name="note[]" value="{{$search_university->note}}">
+                                        </td>
+                                        <td>
+                                            {{ $search_university->updated_at }}
+                                            <input type="hidden" name="updated_at[]" value="{{$search_university->updated_at}}">
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -144,13 +161,7 @@
                 نتائج البحث
             </div>
             <div class="card-body">
-                <div class="card-t-1">
-
-                    <button class="dt-button btn-button-1" id="store">
-                            <span class="print-button__content  js__action--print" title="Print this page">إضافة</span>
-                    </button>
-
-                </div>
+                <div class="card-t-1"></div>
                 <form action="{{ route('add_search') }}" method="post" id="store_form">
                     @csrf
                     <div style="overflow-x:auto;" id="result">
@@ -170,28 +181,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr id = "addResult">
-                                <td id="select"></td>
-                                <td id="country"></td>
-                                <td id="state"></td>
-                                <td id="university"></td>
-                                <td id="category"></td>
-                                <td id="subcategory"></td>
-                                <td id="Bachelor"></td>
-                                <td id="master"></td>
-                                <td id="doctor"></td>
-                                <td id="notes"></td>
-
-                            </tr>
+                            <tr id = "addResult"></tr>
                         </tbody>
-
                     </table>
                 </div>
                 </form>
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
 
         $('#country, #category ,#subcategory,#university,#Bachelor,#master,#doctor').change(function ()     {

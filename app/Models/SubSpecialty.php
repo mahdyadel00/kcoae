@@ -16,4 +16,9 @@ class SubSpecialty extends Model
     {
         return $this->belongsTo(Specialty::class);
     }
+
+    public function universities()
+    {
+        return $this->hasMany(University::class);
+    }
 }

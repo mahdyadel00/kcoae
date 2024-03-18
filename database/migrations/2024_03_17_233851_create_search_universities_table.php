@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_universities', function (Blueprint $table) {
+        Schema::create('search_universities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade')->nullable();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_universities');
+        Schema::dropIfExists('search_universities');
     }
 };

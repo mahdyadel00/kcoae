@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class University extends Model
 {
     use HasFactory;
-    protected $fillable=['country_id','specialty_id','sub_specialty_id','name','master','Bachelor','doctor','note'];
+    protected $fillable =
+        [
+            'country_id',
+            'specialty_id',
+            'sub_specialty_id',
+            'name',
+            'master',
+            'Bachelor',
+            'doctor',
+            'note'
+        ];
 
 
     ##---------- Relationships ----------##

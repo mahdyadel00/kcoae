@@ -44,4 +44,8 @@ class Client extends Authenticatable
     ];
     protected $hidden = ['password', 'remember_token',];
 
+    public function orderUniversities()
+    {
+        return $this->hasMany(OrderUniversity::class);
+    }
 }

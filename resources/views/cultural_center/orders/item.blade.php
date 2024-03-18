@@ -66,6 +66,55 @@
                         <table class="table align-items-right">
                             <thead class="thead-dark">
                             <tr>
+                                <th scope="col">الدولة</th>
+                                <th scope="col">الجامعة </th>
+                                <th scope="col">التخصص</th>
+                                <th scope="col">التخصص الفرعي</th>
+                                <th scope="col">بكالوريوس</th>
+                                <th scope="col">ماجستير</th>
+                                <th scope="col">دكتوراه</th>
+                                <th scope="col">ملاحظات</th>
+                                <th scope="col">أخر تحديث</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($order_universities as $university)
+                                    <tr>
+                                        <td>{{ $university->country->name }}</td>
+                                        <td>{{ $university->name }}</td>
+                                        <td>{{ $university->specialty->name }}</td>
+                                        <td>{{ $university->sub_specialty->name }}</td>
+                                        <td>
+                                            @if($university->Bachelor == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($university->master == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($university->doctor == 1)
+                                                <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                            @else
+                                                <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                            @endif
+                                        </td>
+                                        <td>{{ $university->note }}</td>
+                                        <td>{{ $university->updated_at->toDateString() }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <table class="table align-items-right">
+                            <thead class="thead-dark">
+                            <tr>
                                 <th scope="col" class="col-lg-6">الوثائق التي قمت بتقديمها</th>
                             </tr>
                             </thead>

@@ -96,47 +96,72 @@ class UniversityController extends Controller
                                 <th>آخر تحديث</th>
                             </tr>
                             ';
+
+                $output.='<form action="'.route('add_order_university').'" method="post">';
+                $output.='<input type="hidden" name="_token" value="'.csrf_token().'">';
                 foreach ($universities as $university){
 
                     $output.='      <tr>
                                 <td>
                                     <input type="checkbox" name="university_id[]" value="'.$university->id.'" id="university_id'.$counter.'" >
                                 </td>
-                                <td>'.$university->country->name.'</td>
-                                <td>'.$university->name.'</td>
-                                <td>'.$university->specialty->name.'</td>
-                                <td>'.$university->sub_specialty->name.'</td>';
+                                <td>'.$university->country->name.'
+                                    <input type="hidden" name="country_id[]" value="'.$university->country->id.'">
+                                </td>
+                                <td>'.$university->name.'
+                                    <input type="hidden" name="name[]" value="'.$university->name.'">
+                                </td>
+                                <td>'.$university->specialty->name.'
+                                    <input type="hidden" name="specialty_id[]" value="'.$university->specialty->id.'">
+                                </td>
+                                <td>'.$university->sub_specialty->name.'
+                                    <input type="hidden" name="sub_specialty_id[]" value="'.$university->sub_specialty->id.'">
+                                </td>';
                     if($university->Bachelor==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="Bachelor[]" value="1">
+                                </td>';
                     }elseif ($university->Bachelor==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="Bachelor[]" value="0">
+                                </td>';
                     }
                     if($university->master==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="master[]" value="1">
+                                </td>';
                     }elseif ($university->master==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="master[]" value="0">
+                                </td>';
                     }
-
                     if($university->doctor==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="doctor[]" value="1">
+                                </td>';
                     }elseif ($university->doctor==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="doctor[]" value="0">
+                                </td>';
                     }
 
-                    $output.='     <td>'.$university->note.'</td>
+                    $output.='     <td>'.$university->note.
+                        '<input type="hidden" name="note[]" value="'.$university->note.'">
+                                    </td>
                            <td>'.$university->updated_at->toDateString().'</td>
                             </tr>';
                 }
 
                 $output.='</table>';
+                $output.='<button class="dt-button btn-button-1" type="submit">
+                            <span class="print-button__content  js__action--print" title="Print this page">اضافة</span>
+                        </button>';
+                $output.='</form>';
                 return Response($output);
-
             }
 
         }
     }
-
-
 
     public function addSearch(Request $request)
     {
@@ -144,11 +169,49 @@ class UniversityController extends Controller
         {
             $output="";
 
+            $country_id         =   $request->search_country;
+            $university_id      =   $request->search_university;
+            $specialty_id       =   $request->search_specialty;
+            $sub_specialty_id   =   $request->search_sub_specialty;
+            $Bachelor           =   $request->search_Bachelor;
+            $master             =   $request->search_master;
+            $doctor             =   $request->search_doctor;
 
-            $universities = University::where('sub_specialty_id', $request->subcategory)
-                ->get();
 
-            if($universities)
+            $universities = University::where(function ($query) use ($country_id, $university_id, $specialty_id, $sub_specialty_id,$Bachelor,$master,$doctor) {
+
+                // country.
+                if (!empty($country_id)) {
+                    $query->Where('country_id', $country_id);
+                }
+
+                // university.
+                if (!empty($university_id)) {
+                    $query->Where('id',$university_id);
+                }
+
+                // specialty.
+                if (!empty($specialty_id)) {
+                    $query->Where('specialty_id', $specialty_id);
+                }
+                // sub_specialty.
+                if (!empty($sub_specialty_id)) {
+                    $query->Where('sub_specialty_id', $sub_specialty_id);
+                }
+                // Bachelor.
+                if ($Bachelor=='true') {
+                    $query->Where('Bachelor', '1');
+                }
+                // master.
+                if($master=='true'){
+                    $query->Where('master','1');
+                }
+                // doctor.
+                if ($doctor=='true') {
+                    $query->Where('doctor', '1');
+                }
+            })->paginate(10);
+                if($universities)
             {$counter=1;
                 $output.=' <table>  <tr>
                                 <th>الدولة </th>
@@ -163,36 +226,63 @@ class UniversityController extends Controller
                             </tr>
                             ';
 
-                    foreach ($universities as $university){
+                $output.='<form action="'.route('add_order_university').'" method="post">';
+                $output.='<input type="hidden" name="_token" value="'.csrf_token().'">';
+                foreach ($universities as $university){
 
-                    $output.='  <tr>
-                                    <td>'.$university->country->name.'</td>
-                                    <td>'.$university->name.'</td>
-                                    <td>'.$university->specialty->name.'</td>
-                                    <td>'.$university->sub_specialty->name.'</td>';
+                    $output.='      <tr>
+                                <td>'.$university->country->name.'
+                                    <input type="hidden" name="country_id[]" value="'.$university->country->id.'">
+                                </td>
+                                <td>'.$university->name.'
+                                    <input type="hidden" name="name[]" value="'.$university->name.'">
+                                </td>
+                                <td>'.$university->specialty->name.'
+                                    <input type="hidden" name="specialty_id[]" value="'.$university->specialty->id.'">
+                                </td>
+                                <td>'.$university->sub_specialty->name.'
+                                    <input type="hidden" name="sub_specialty_id[]" value="'.$university->sub_specialty->id.'">
+                                </td>';
                     if($university->Bachelor==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="Bachelor[]" value="1">
+                                </td>';
                     }elseif ($university->Bachelor==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="Bachelor[]" value="0">
+                                </td>';
                     }
                     if($university->master==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="master[]" value="1">
+                                </td>';
                     }elseif ($university->master==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="master[]" value="0">
+                                </td>';
                     }
-
                     if($university->doctor==1){
-                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i></td>';
+                        $output.='<td><i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                    <input type="hidden" name="doctor[]" value="1">
+                                </td>';
                     }elseif ($university->doctor==0){
-                        $output.='<td></td>';
+                        $output.='<td>
+                                    <input type="hidden" name="doctor[]" value="0">
+                                </td>';
                     }
 
-                    $output.='     <td>'.$university->note.'</td>
+                    $output.='     <td>'.$university->note.
+                                        '<input type="hidden" name="note[]" value="'.$university->note.'">
+                                    </td>
                            <td>'.$university->updated_at->toDateString().'</td>
                             </tr>';
                 }
 
                 $output.='</table>';
+                $output.='<button class="dt-button btn-button-1" type="submit">
+                            <span class="print-button__content  js__action--print" title="Print this page">إرسال</span>
+                        </button>';
+                $output.='</form>';
                 return Response($output);
 
             }

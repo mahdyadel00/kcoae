@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Note;
 use App\Models\Order;
 use App\Models\OrderUniversity;
+use App\Models\SearchUniversity;
 use App\Models\Specialty;
 use App\Models\SubSpecialty;
 use App\Models\University;
@@ -27,7 +28,9 @@ class OrderController extends Controller
     public function show($id){
         $order  =   Order::find($id);
 
-        return view('cultural_center.orders.item',['order'=>$order]);
+        $order_universities = OrderUniversity::where('order_id',$id)->get();
+
+        return view('cultural_center.orders.item',compact('order','order_universities'));
     }
 
     public function create(){
@@ -135,9 +138,10 @@ class OrderController extends Controller
             $specialties        = Specialty::orderBy('created_at', 'desc')->get();
             $sub_specialties    = SubSpecialty::orderBy('created_at', 'desc')->get();
             $notes              = Note::orderBy('created_at', 'desc')->get();
+            $search_universities = SearchUniversity::where('client_id', auth('client')->user()->id)->orderBy('created_at', 'desc')->get();
 
             DB::commit();
-            return view('cultural_center.orders.search' , compact('countries', 'universities', 'specialties', 'sub_specialties', 'notes'));
+            return view('cultural_center.orders.search' , compact('countries', 'universities', 'specialties', 'sub_specialties', 'notes', 'search_universities'));
         }catch (\Exception $e){
             DB::rollback();
             Log::channel('custom')->error('Error in OrderController/search, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
@@ -146,18 +150,18 @@ class OrderController extends Controller
     }
 
     public function addOrderUniversity(Request $request){
-        dd($request->all());
+//        dd($request->all());
         try{
             DB::beginTransaction();
             $request->validate([
-                'country_id'        => 'required',
-                'specialty_id'      => 'required',
-                'sub_specialty_id'  => 'required',
-                'name'              => 'required',
-                'master'            => 'required',
-                'Bachelor'          => 'required',
-                'doctor'            => 'required',
-                'note'              => 'required',
+                'country_id'        => 'sometimes',
+                'specialty_id'      => 'sometimes',
+                'sub_specialty_id'  => 'sometimes',
+                'name'              => 'sometimes',
+                'master'            => 'sometimes',
+                'Bachelor'          => 'sometimes',
+                'doctor'            => 'sometimes',
+                'note'              => 'sometimes',
             ], [
                 'country_id.required'       => 'Country is required',
                 'specialty_id.required'     => 'Specialty is required',
@@ -168,24 +172,81 @@ class OrderController extends Controller
                 'doctor.required'           => 'Doctor is required',
                 'note.required'             => 'Note is required',
             ]);
+            $order = Order::where('client_id', auth('client')->user()->id)->orderBy('created_at', 'desc')->first();
+            foreach ($request->name as $key => $value){
 
-            $order_universities = OrderUniversity::create([
-
-                'country_id'        => request('country_id'),
-                'specialty_id'      => request('specialty_id'),
-                'sub_specialty_id'  => request('sub_specialty_id'),
-                'name'              => request('name'),
-                'master'            => request('master'),
-                'Bachelor'          => request('Bachelor'),
-                'doctor'            => request('doctor'),
-                'note'              => request('note'),
-            ]);
-
+                $data = [
+                    'country_id'        => $request->country_id[$key],
+                    'specialty_id'      => $request->specialty_id[$key],
+                    'sub_specialty_id'  => $request->sub_specialty_id[$key],
+                    'name'              => $value,
+                    'client_id'         => auth('client')->user()->id,
+                    'order_id'          => $order->id,
+                    'master'            => $request->master[$key],
+                    'Bachelor'          => $request->Bachelor[$key],
+                    'doctor'            => $request->doctor[$key],
+                    'note'              => $request->note[$key],
+                ];
+                OrderUniversity::create($data);
+            }
             DB::commit();
             session()->flash('success', 'Order added successfully');
             return redirect()->route('search');
         }catch (\Exception $e){
             DB::rollback();
+            Log::channel('custom')->error('Error in OrderController/addSearch, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
+            return redirect()->back()->with('error', 'Error, Please try again');
+        }
+    }
+
+    public function addSearch(Request $request){
+//        dd($request->all());
+        try{
+            DB::beginTransaction();
+            $request->validate([
+                'country_id'        => 'sometimes',
+                'specialty_id'      => 'sometimes',
+                'sub_specialty_id'  => 'sometimes',
+                'name'              => 'sometimes',
+                'master'            => 'sometimes',
+                'Bachelor'          => 'sometimes',
+                'doctor'            => 'sometimes',
+                'note'              => 'sometimes',
+            ], [
+                'country_id.required'       => 'Country is required',
+                'specialty_id.required'     => 'Specialty is required',
+                'sub_specialty_id.required' => 'Sub Specialty is required',
+                'name.required'             => 'University name is required',
+                'master.required'           => 'Master is required',
+                'Bachelor.required'         => 'Bachelor is required',
+                'doctor.required'           => 'Doctor is required',
+                'note.required'             => 'Note is required',
+            ]);
+            $order = Order::where('client_id', auth('client')->user()->id)->orderBy('created_at', 'desc')->first();
+            $universities = University::whereIN('id', $request->university_id)->get();
+
+                SearchUniversity::where('client_id', auth('client')->user()->id)->where('order_id', $order->id)->delete();
+
+                SearchUniversity::insert($universities->map(function ($university) use ($order) {
+                    return [
+                        'country_id'        => $university->country_id,
+                        'specialty_id'      => $university->specialty_id,
+                        'sub_specialty_id'  => $university->sub_specialty_id,
+                        'name'              => $university->name,
+                        'client_id'         => auth('client')->user()->id,
+                        'order_id'          => $order->id,
+                        'master'            => $university->master,
+                        'Bachelor'          => $university->Bachelor,
+                        'doctor'            => $university->doctor,
+                        'note'              => $university->note,
+                    ];
+                })->toArray());
+            DB::commit();
+            session()->flash('success', 'Order added successfully');
+            return redirect()->back();
+        }catch (\Exception $e){
+            DB::rollback();
+            dd($e->getMessage());
             Log::channel('custom')->error('Error in OrderController/addSearch, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
             return redirect()->back()->with('error', 'Error, Please try again');
         }
