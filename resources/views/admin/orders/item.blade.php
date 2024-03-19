@@ -20,31 +20,110 @@
                           </div>
                         <div class="" style="padding: 2%; font-weight: bold;">
                             <div class="container">
-
+                                <div class="hadding-text-area mt-6" style="margin-bottom: 20px;margin-right: 250px;">
+                                    <h1 class="black-c popin small" style="font-size: 30px">البيانات الشخصية </h1>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label> الاسم  : </label>
-                                        <span>{{$order->client->name}}</span>
+                                        <label class="font"> الاسم الأول  : </label>
+                                        <span>{{$order->client->first_name_ar}}</span>
                                     </div>
+
                                     <div class="col-md-6">
-                                        <label> البريد الاكتروني  : </label>
+                                        <label class="font"> الاسم الأول(إنجليزي) : </label>
+                                        <span>{{$order->client->first_name_en }}</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="font"> الاسم الثاني  : </label>
+                                        <span>{{$order->client->second_name_ar}}</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="font"> الاسم الثاني(إنجليزي) : </label>
+                                        <span>{{$order->client->second_name_en }}</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="font"> الاسم الثالث  : </label>
+                                        <span>{{$order->client->third_name_ar}}</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="font"> الاسم الثالث(إنجليزي) : </label>
+                                        <span>{{$order->client->third_name_en }}</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="font"> البريد الاكتروني  : </label>
                                         <span>{{$order->client->email}}</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label> رقم الهاتف  : </label>
+                                        <label class="font"> رقم الهاتف  : </label>
                                         <span>{{$order->client->mobile}}</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label> الرقم الوطني  : </label>
+                                        <label class="font"> الرقم الوطني  : </label>
                                         <span>{{$order->client->ID_number}}</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label> تاريخ تقديم الطلب  : </label>
+                                        <label class="font"> تاريخ تقديم الطلب  : </label>
                                         <span>{{$order->client->created_at->toDateString()}}</span>
                                     </div>
-                                    <div class="col-md-6">
-
+                                    <table class="table table-striped"  id="myTable1">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">الدولة</th>
+                                            <th scope="col">الجامعة </th>
+                                            <th scope="col">التخصص</th>
+                                            <th scope="col">التخصص الفرعي</th>
+                                            <th scope="col">بكالوريوس</th>
+                                            <th scope="col">ماجستير</th>
+                                            <th scope="col">دكتوراه</th>
+                                            <th scope="col">ملاحظات</th>
+                                            <th scope="col">أخر تحديث</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($order_universities as $university)
+                                            <tr>
+                                                <td>{{ $university->country->name }}</td>
+                                                <td>{{ $university->name }}</td>
+                                                <td>{{ $university->specialty->name }}</td>
+                                                <td>{{ $university->sub_specialty->name }}</td>
+                                                <td>
+                                                    @if($university->Bachelor == 1)
+                                                        <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                                    @else
+                                                        <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($university->master == 1)
+                                                        <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                                    @else
+                                                        <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($university->doctor == 1)
+                                                        <i class="fa fa-check-circle check green" aria-hidden="true"></i>
+                                                    @else
+                                                        <i class="fa fa-times-circle check red" aria-hidden="true"></i>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $university->note }}</td>
+                                                <td>{{ $university->updated_at->toDateString() }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    <div class="col-md-12" style="margin: 20px;margin-right: 250px">
+                                        <label style="font-size: 20px">
+                                            <th scope="col" class="col-lg-6">الوثائق التي قمت بتقديمها</th>
+                                        </label>
                                     </div>
+
                                     <div class="col-md-6">
                                         <label> شهادة الثانوية العامة   : </label><br>
                                         <img src="/{{$order->high_school_certificate}}" height="300" width="300">

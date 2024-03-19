@@ -176,16 +176,16 @@ class OrderController extends Controller
             foreach ($request->name as $key => $value){
 
                 $data = [
-                    'country_id'        => $request->country_id[$key],
-                    'specialty_id'      => $request->specialty_id[$key],
-                    'sub_specialty_id'  => $request->sub_specialty_id[$key],
+                    'country_id'        => $request->country_id[$key] ?? null,
+                    'specialty_id'      => $request->specialty_id[$key] ?? null,
+                    'sub_specialty_id'  => $request->sub_specialty_id[$key] ?? null,
                     'name'              => $value,
                     'client_id'         => auth('client')->user()->id,
                     'order_id'          => $order->id,
-                    'master'            => $request->master[$key],
-                    'Bachelor'          => $request->Bachelor[$key],
-                    'doctor'            => $request->doctor[$key],
-                    'note'              => $request->note[$key],
+                    'master'            => $request->master[$key] ?? null,
+                    'Bachelor'          => $request->Bachelor[$key] ?? null,
+                    'doctor'            => $request->doctor[$key] ?? null,
+                    'note'              => $request->note[$key] ?? null,
                 ];
                 OrderUniversity::create($data);
             }
@@ -194,6 +194,7 @@ class OrderController extends Controller
             return redirect()->route('search');
         }catch (\Exception $e){
             DB::rollback();
+            dd($e->getMessage());
             Log::channel('custom')->error('Error in OrderController/addSearch, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
             return redirect()->back()->with('error', 'Error, Please try again');
         }
@@ -246,7 +247,6 @@ class OrderController extends Controller
             return redirect()->back();
         }catch (\Exception $e){
             DB::rollback();
-            dd($e->getMessage());
             Log::channel('custom')->error('Error in OrderController/addSearch, Error: ['.$e->getMessage().'], Line: ['.$e->getLine().'], File: ['.$e->getFile().']');
             return redirect()->back()->with('error', 'Error, Please try again');
         }

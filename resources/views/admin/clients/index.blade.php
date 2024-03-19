@@ -136,27 +136,4 @@
             });
         }
     </script>
-{{--    <script>--}}
-{{--        $('.switch').change(function() {--}}
-{{--            var is_active = $(this).prop('checked') === true ? 1 : 0;--}}
-{{--            var client_id = $(this).data('id');--}}
-{{--            $.ajax({--}}
-{{--                type: "GET",--}}
-{{--                dataType: "json",--}}
-{{--                url: '{{route('admin_panel.clients.change_status')}}',--}}
-{{--                data: {'is_active': is_active, 'client_id': client_id},--}}
-{{--                success: function(data){--}}
-{{--                    Swal.fire({--}}
-{{--                        title: 'تم تغيير حالة المستفيد بنجاح',--}}
-{{--                        icon: 'success',--}}
-{{--                        showCancelButton: false,--}}
-{{--                        showConfirmButton: false,--}}
-{{--                        timer: 1500--}}
-{{--                    });--}}
-{{--                    //load the table again--}}
-{{--                    $('#t1').load(document.URL +  ' #t1');--}}
-{{--                }--}}
-{{--            });--}}
-{{--        })--}}
-{{--    </script>--}}
 @endpush

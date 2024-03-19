@@ -77,21 +77,17 @@
                                                     <a target="_blank" href="/admin_panel/toPDF/{{$order->id}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تصدير لملف ">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                                                     </a>
+                                                    <a href="javascript:void(0)" class="action-btn btn-delete bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="حذف" onclick="deleteOrder({{ $order->id }})">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M16 6l-1 18H8l-1-18"></path><path d="M2 10l2 18h16l2-18"></path></svg>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
-
                                     @endforeach
-
                                     </tbody>
-
                                 </table>
-
-                            <div class="col-sm-12 col-md-7">
-                                    {{ $orders->links() }}
-                            </div>
-
-                            </div>
+                            <div class="col-sm-12 col-md-7">{{ $orders->links() }}</div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -100,8 +96,48 @@
         <!--  BEGIN FOOTER  -->
     @include('admin.layouts.footer')
     <!--  END FOOTER  -->
-
-
-
-
 @endsection
+        @push('scripts')
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            <script type="text/javascript">
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                function deleteOrder(id){
+                    Swal.fire({
+                        title: "هل أنت متأكد من حذف هذا الطلب؟",
+                        text: "لن تتمكن من التراجع عن هذا الاجراء!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'نعم, قم بالحذف!',
+                        cancelButtonText: 'الغاء'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: 'DELETE',
+                                url: '{{route('admin_panel.orders.destroy','')}}'+'/'+id,
+                                data: {
+                                    id: id
+                                },
+                                success: function (data) {
+                                    Swal.fire({
+                                        title: 'تم حذف الطلب بنجاح',
+                                        icon: 'success',
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    //load the table again
+                                    $('#t1').load(document.URL +  ' #t1');
+                                }
+                            });
+                        }
+                    });
+                }
+            </script>
+    @endpush

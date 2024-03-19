@@ -66,11 +66,11 @@
         </div>
         <!-- end card -->
         <div class="card table-card">
-            <form action="{{ route('add_order_university') }}" method="post">
+            <form action="{{ route('add_order_university') }}" method="post" id="store_form">
                 @csrf
                 <div class="card-body">
                     <div class="card-t-1">
-                        <button class="dt-button btn-button-1" type="submit">
+                        <button class="dt-button btn-button-1"  id="send">
                             <span class="print-button__content  js__action--print" title="إرسال">إرسال</span>
                         </button>
 
@@ -79,6 +79,7 @@
                         <table>
                             <thead>
                             <tr>
+                                <th>حذف</th>
                                 <th>الدولة</th>
                                 <th>الولاية</th>
                                 <th>الجامعة</th>
@@ -94,6 +95,11 @@
                             <tbody>
                                 @foreach($search_universities as $search_university)
                                     <tr id ="newResult">
+                                        <td>
+                                            <a href="javascript:void(0)" class="action-btn btn-delete bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="حذف" onclick="deleteSearchUniversity({{ $search_university->id }})">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M16 6l-1 18H8l-1-18"></path><path d="M2 10l2 18h16l2-18"></path></svg>
+                                            </a>
+                                        </td>
                                         <td>{{$search_university->country->name}}
                                             <input type="hidden" name="country_id[]" value="{{$search_university->country->id}}">
                                         </td>
@@ -154,12 +160,9 @@
                 <p>{{$note->description}}</p>
             </div>
         @endforeach
-
         <!-- end danger-section -->
         <div class="card table-card">
-            <div class="card-header">
-                نتائج البحث
-            </div>
+            <div class="card-header">نتائج البحث</div>
             <div class="card-body">
                 <div class="card-t-1"></div>
                 <form action="{{ route('add_search') }}" method="post" id="store_form">
@@ -268,5 +271,68 @@
         });
 
     </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            function deleteSearchUniversity(id){
+                Swal.fire({
+                    title: 'هل انت متأكد من الحذف؟',
+                    text: "لن تتمكن من التراجع عن هذا الاجراء!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'نعم, قم بالحذف!',
+                    cancelButtonText: 'الغاء'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '{{route('destroy_search_university','')}}'+'/'+id,
+                            data: {
+                                id: id
+                            },
+                            success: function (data) {
+                                Swal.fire({
+                                    title: 'تم الحذف بنجاح',
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                //load the table again
+                                $('#newResult').load(document.URL +  ' #newResult');
+                            }
+                        });
+                    }
+                });
+            }
+            //when the user click on the send button store the data in the database in form id store_form
+            $('#send').on('click', function (e) {
+                e.preventDefault();
+                var form = $('#store_form');
+                $.ajax({
+                    type: 'post',
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (data) {
+                        Swal.fire({
+                            title: 'تم الإرسال بنجاح',
+                            icon: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        //empty the table
+                        $('#newResult').empty();
+                    }
+                });
+            });
+        </script>
 
 @endsection

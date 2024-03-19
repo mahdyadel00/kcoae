@@ -13,7 +13,7 @@
                                         <div class="counts-2 client-count-item">
                                             <div class="popin lists file">
                                                 <span class="popin"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                                                    <a href="{{ route('paper') }}">تقديم الي من يهمه الامر</a>
+                                                    <a href="{{ route('paper') }}">تقديم طلب إلى من يهمه الأمر</a>
                                                 </span>
                                             </div>
                                         </div>

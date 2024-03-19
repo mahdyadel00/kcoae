@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Models\OrderUniversity;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -13,14 +17,16 @@ use Elibyy\TCPDF\Facades\TCPDF as PDF;
 class OrderController extends Controller
 {
     public function index(){
-        $orders=Order::orderBy('created_at','desc')->paginate(15);
-        return view ('admin.orders.index',['orders'=>$orders]);
+        $orders = Order::orderBy('created_at','desc')->paginate(15);
+        return view ('admin.orders.index',compact('orders'));
     }
 
 
     public function show(Request $request,$id){
-        $order=Order::find($id);
-        return view('admin.orders.item',['order'=>$order]);
+        $order = Order::find($id);
+        $order_universities = OrderUniversity::where('order_id',$id)->get();
+
+        return view('admin.orders.item',compact('order','order_universities'));
     }
 
     public function accept(Request $request,$id){
@@ -78,4 +84,27 @@ class OrderController extends Controller
 
          return response()->download(public_path($name));
     }
+
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $order = Order::find($id);
+
+            if(!$order){
+                return response()->json(['msg'=>'الطلب غير موجود'], 404);
+            }
+
+            $order->delete();
+
+            DB::commit();
+            return response()->json(['msg'=>'تم الحذف بنجاح'], 200);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            Log::channel('custom')->error($ex->getMessage());
+            return response()->json(['msg'=>'حدث خطأ ما'], 500);
+        }
+    }
+
 }

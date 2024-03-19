@@ -278,6 +278,8 @@ Route::get('/university', [\App\Http\Controllers\Cultural_center\UniversityContr
 Route::get('/search_university', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'search']);
 //Route Add Search
 Route::get('/add_search_university', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'addSearch'])->name('add_search_university');
+//Route destroy Search University
+Route::delete('/destroy_search_university/{id}', [\App\Http\Controllers\Cultural_center\UniversityController::class, 'destroySearch'])->name('destroy_search_university');
 ## get universities belongs to specific country
 Route::post('country',  [\App\Http\Controllers\Cultural_center\UniversityController::class, 'country'])->name('country');
 
