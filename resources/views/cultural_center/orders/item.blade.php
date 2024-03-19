@@ -80,10 +80,10 @@
                             <tbody>
                                 @foreach($order_universities as $university)
                                     <tr>
-                                        <td>{{ $university->country->name }}</td>
+                                        <td>{{ $university->country?->name }}</td>
                                         <td>{{ $university->name }}</td>
-                                        <td>{{ $university->specialty->name }}</td>
-                                        <td>{{ $university->sub_specialty->name }}</td>
+                                        <td>{{ $university->specialty?->name }}</td>
+                                        <td>{{ $university->sub_specialty?->name }}</td>
                                         <td>
                                             @if($university->Bachelor == 1)
                                                 <i class="fa fa-check-circle check green" aria-hidden="true"></i>
