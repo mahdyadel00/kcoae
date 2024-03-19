@@ -230,16 +230,16 @@ class OrderController extends Controller
 
                 SearchUniversity::insert($universities->map(function ($university) use ($order) {
                     return [
-                        'country_id'        => $university->country_id,
-                        'specialty_id'      => $university->specialty_id,
-                        'sub_specialty_id'  => $university->sub_specialty_id,
+                        'country_id'        => $university->country_id ?? null,
+                        'specialty_id'      => $university->specialty_id ?? null,
+                        'sub_specialty_id'  => $university->sub_specialty_id ?? null,
                         'name'              => $university->name,
                         'client_id'         => auth('client')->user()->id,
                         'order_id'          => $order->id,
-                        'master'            => $university->master,
-                        'Bachelor'          => $university->Bachelor,
-                        'doctor'            => $university->doctor,
-                        'note'              => $university->note,
+                        'master'            => $university->master ?? null,
+                        'Bachelor'          => $university->Bachelor ?? null,
+                        'doctor'            => $university->doctor ?? null,
+                        'note'              => $university->note ?? null,
                     ];
                 })->toArray());
             DB::commit();
