@@ -82,6 +82,7 @@
                                             <th scope="col">دكتوراه</th>
                                             <th scope="col">ملاحظات</th>
                                             <th scope="col">أخر تحديث</th>
+                                            <th scope="col">طباعة</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -114,6 +115,11 @@
                                                 </td>
                                                 <td>{{ $university->note }}</td>
                                                 <td>{{ $university->updated_at->toDateString() }}</td>
+                                                <td>  
+                                                  <div onclick="printContent({{$university->id}})" role="button" class="action-btn btn-edit bs-tooltip me-2 d-inline" style="color: #007bff;" data-toggle="tooltip" data-placement="top">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                                  </div>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -184,9 +190,10 @@
                                     <a href="/admin_panel/sent_order/{{$order->id}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تم الإرسال ">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
                                     </a>
-                                    <a target="_blank" href="/admin_panel/toPDF/{{$order->id}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تصدير لملف ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                    <a target="_blank" href="/admin_panel/toPDF/{{$order->id}}" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="تحميل لملف ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     </a>
+                                   
                                 </div>
 
                             </div>
@@ -196,12 +203,26 @@
                         </div>
                     </div>
                 </div>
+                <div style="opacity: 0; width: 0; hight: 0;">
+                    <iframe id="printFrame" name="printFrame"></iframe>
+                </div>
             </div>
-
-
         <!--  BEGIN FOOTER  -->
     @include('admin.layouts.footer')
     <!--  END FOOTER  -->
+   
+
+<script>
+function printContent(universityId) {
+    var printFrame = document.getElementById('printFrame');
+    var printUrl = '/admin_panel/toPrintPDF/' + universityId; 
+    // Use location.replace to load the content without affecting the browser's history
+    printFrame.contentWindow.location.replace(printUrl);
+    printFrame.onload = function() {
+    printFrame.contentWindow.print();
+    };
+}
+</script>
     </div>
 
 

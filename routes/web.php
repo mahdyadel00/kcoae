@@ -51,7 +51,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/admin_login', [AuthController::class, 'loginView'])->name('admin_login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
@@ -59,7 +58,7 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
     Route::group(['middleware' => 'auth'], function () {
         ## About us Routes
         Route::resource('about', AboutController::class);
-
+        
         ## Admins Routes
         Route::resource('admins', AdminController::class);
         Route::get('/admin_del/{id}', [AdminController::class, 'destroy']);
@@ -167,6 +166,7 @@ Route::group(['prefix' => 'admin_panel','as' => 'admin_panel.'], function () {
         Route::get('/sent_order/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'sent']);
         Route::get('/reject_order/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'reject']);
         Route::get('/toPDF/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'toPDF']);
+        Route::get('/toPrintPDF/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'toPrintPDF']);
         Route::resource('order_notes', \App\Http\Controllers\Admin\OrderNoteController::class);
 
         ## settings

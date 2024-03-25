@@ -107,4 +107,10 @@ class OrderController extends Controller
         }
     }
 
+    
+    function toPrintPDF($id)
+    {
+        $orderUniversity = OrderUniversity::find($id);
+        return view('admin.orders.print',['orderUniversity'=>$orderUniversity]);
+    }
 }
